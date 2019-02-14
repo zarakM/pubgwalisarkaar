@@ -12,7 +12,21 @@ class CreateLeaderboard extends Component {
 
     addBoard = e => {
         e.preventDefault();
-        firebase.database().ref().child("leaderboard")
+        firebase.database().ref().child("leaderboard/"+this.id.value).set({
+            user_name: this.user.value,
+            kills: this.kills.value,
+            rank: this.rank.value,
+            prize: this.prize.value
+        }).then(()=>{
+            alert("Updated")
+            this.id.value= ""
+            this.user.value= ""
+            this.kills.value= ""
+            this.rank.value= ""
+            this.prize.value= ""
+        }).catch(error=>{
+            alert("Error occured check your internet or refresh your page")
+        })
     }
 
     render() {
@@ -31,8 +45,8 @@ class CreateLeaderboard extends Component {
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Username"
-                                ref={ec => (this.user = ec)}
+                                placeholder="Contest Id"
+                                ref={ec => (this.id = ec)}
                                 required
                             />
                         </div>
@@ -91,7 +105,7 @@ class CreateLeaderboard extends Component {
                             <input
                                 type="number"
                                 className="form-control"
-                                placeholder="Map"
+                                placeholder="Prize"
                                 ref={ec => (this.prize = ec)}
                                 required
                             />

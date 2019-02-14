@@ -13,7 +13,14 @@ class CreateVideos extends Component {
 
     addVideo=e=>{
         e.preventDefault();
-
+        firebase.database().ref().push().set({
+            link: this.link.value
+        }).then(()=>{
+            alert("Entered")
+            this.link.value = ""
+        }).catch(error=>{
+            alert("Error occured check your internet or refresh your page")
+        })
     }
     
     render() { 
@@ -32,7 +39,7 @@ class CreateVideos extends Component {
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Map"
+                                placeholder="Link"
                                 ref={ec => (this.link = ec)}
                                 required
                             />

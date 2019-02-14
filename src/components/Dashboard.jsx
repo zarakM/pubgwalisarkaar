@@ -3,7 +3,13 @@ import Navbar from "./components/Navbar"
 
 
 class Dashboard extends Component {
-    state = {  }
+    constructor(){
+        super();
+        this.state={
+
+        }
+    }
+    
     render() { 
         return ( 
             <div>
