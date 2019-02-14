@@ -5,9 +5,7 @@ class GetVideos extends Component {
     constructor(){
         super()
         this.state = {
-            products: [],
-            edit: true,
-            key: ""
+            videos: []
         };
         let com = this;
         firebase
@@ -18,24 +16,21 @@ class GetVideos extends Component {
                 let items = [];
                 snap.forEach(childD => {
                     items.push({
-                        code: childD.key,
-                        model: childD.val().model,
-                        name: childD.val().name,
-                        volt: childD.val().volt,
-                        kw: childD.val().kw,
-                        quantity: childD.val().quantity
+                        link: childD.val().link
                     });
                 });
-                Array.prototype.push.apply(com.state.products, items);
+                Array.prototype.push.apply(com.state.videos, items);
                 com.setState({
-                    products: com.state.products
+                    videos: com.state.videos
                 });
             });
     }
     render() { 
         return ( 
             <div>
-                
+                {this.state.videos.map(item=>
+                    <youtube link={item} />
+                )}
             </div>
          );
     }

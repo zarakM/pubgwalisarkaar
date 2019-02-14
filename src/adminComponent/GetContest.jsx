@@ -5,30 +5,29 @@ class GetContest extends Component {
     constructor(){
         super()
         this.state = {
-            products: [],
-            edit: true,
-            key: ""
+            contests: []
         };
         let com = this;
         firebase
             .database()
             .ref()
-            .child("product")
+            .child("contests")
             .once("value", snap => {
                 let items = [];
                 snap.forEach(childD => {
                     items.push({
-                        code: childD.key,
-                        model: childD.val().model,
-                        name: childD.val().name,
-                        volt: childD.val().volt,
-                        kw: childD.val().kw,
-                        quantity: childD.val().quantity
+                        id: childD.key,
+                        map: childD.val().map,
+                        type: childD.val().type,
+                        entry: childD.val().entry,
+                        per_kill: childD.val().per_kill,
+                        date: childD.val().date,
+                        time: childD.val().time
                     });
                 });
-                Array.prototype.push.apply(com.state.products, items);
+                Array.prototype.push.apply(com.state.contests, items);
                 com.setState({
-                    products: com.state.products
+                    contests: com.state.contests
                 });
             });
     }
