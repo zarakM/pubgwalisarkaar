@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
+import Navbar from "./Navbar"
 
 class GetVideos extends Component {
     constructor(){
@@ -7,15 +8,14 @@ class GetVideos extends Component {
         this.state = {
             videos: []
         };
+        var ref = firebase.database().ref()
         let com = this;
-        firebase
-            .database()
-            .ref()
-            .child("product")
+        ref.child("videos")
             .once("value", snap => {
                 let items = [];
                 snap.forEach(childD => {
                     items.push({
+                        id: childD.key,
                         link: childD.val().link
                     });
                 });
@@ -25,14 +25,48 @@ class GetVideos extends Component {
                 });
             });
     }
+
+    handleDelete=(id,e)=>{
+        e.preventDefault();
+        var ref = firebase.database().ref()
+        ref.child("videos/"+id).remove().then(()=>{
+            alert("videos deleted")
+            this.props.history.push("/create_contest");
+        }).catch(error=>{
+            alert("an error occured")
+        })
+    }
     render() { 
         return ( 
-            <div>
-                {/* yahan karo kaam tum */}
-                {this.state.videos.map(item=>
-                    <youtube link={item} />
-                )}
-            </div>
+            <div className="container">
+            <Navbar />
+            <br />
+            <h3>Videos</h3>
+            <br />
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Link</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                {this.state.videos}
+                <tbody>
+                    {this.state.videos.map((value, key) => (
+                        <tr key={key}>
+                            <td>{value.link}</td>
+                            <td>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={this.handleDelete.bind(this, value.id)}>
+                                    Delete
+                                    </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
          );
     }
 }

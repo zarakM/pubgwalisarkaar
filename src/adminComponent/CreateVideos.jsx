@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Navbar from "./Navbar"
 import * as firebase from "firebase";
 
-
 class CreateVideos extends Component {
     constructor(){
         super()
@@ -13,7 +12,7 @@ class CreateVideos extends Component {
 
     addVideo=e=>{
         e.preventDefault();
-        firebase.database().ref().push().set({
+        firebase.database().ref().child("videos").push().set({
             link: this.link.value
         }).then(()=>{
             alert("Entered")
