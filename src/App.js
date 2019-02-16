@@ -28,23 +28,29 @@ class App extends Component {
       <div>
         <HashRouter>
           <Switch><div>
-            {/* user route */}
-            {firebase.auth().currentUser == null?<div>
-            <Route exact path="/" component={StartScreen} />
-            <Route path="/register" component={SignUp} /></div>
-:null}
             {/* admin route */}
-
             <Route path="/admin" component={Admin} />
+            <Route path="/dashboard_admin" component={DashboardAdmin} />
+            
             <Route path="/create_contest" component={CreateContest} />
+            <Route path="/create_videos" component={CreateVideos} />
+            <Route path="/create_leaderboard" component={CreateLeaderboard} />
+            
             <Route path="/get_contest" component={GetContest} />
             <Route path="/get_leaderboard" component={GetLeaderboard} />
-            <Route path="/create_videos" component={CreateVideos} />
             <Route path="/get_videos" component={GetVideos} />
-            <Route path="/create_leaderboard" component={CreateLeaderboard} />
-            <Route path="/login" component={SignIn} />
-            <Route path="/dashboard_admin" component={DashboardAdmin} />
           </div>
+          </Switch>
+        </HashRouter >
+        <HashRouter>
+          <Switch>
+            {/* user route */}
+            <Route exact path="/" component={StartScreen} />
+            <Route path="/login" component={SignIn} />
+            <Route path="/register" component={SignUp} />
+            <Route path="/my_contests" component={SignUp} />
+            <Route path="/contests" component={SignUp} />
+            
           </Switch>
         </HashRouter >
 
