@@ -20,6 +20,7 @@ class Navbar extends Component {
             <Link className="nav-link" to="/create_leaderboard">Update LeaderBoard</Link>
             <Link className="nav-link" to="/get_videos">Get Videos</Link>
             <Link className="nav-link" to="/get_contest">Get Contest</Link>
+            <Link className="nav-link" to="/get_leaderboard">Get LeaderBoard</Link>
               
             </div>
           </div>

@@ -68,7 +68,6 @@ class GetContest extends Component {
                             <th scope="col">Per Kill</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
-                            <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                             <th scope="col">Open Leaderboard</th>
                         </tr>
@@ -85,13 +84,6 @@ class GetContest extends Component {
                                 <td>{value.time}</td>
                                 <td>
                                     <button
-                                        className="btn btn-info"
-                                        onClick={this.handleEdit.bind(this, value.id)}>
-                                        Edit
-                                        </button>
-                                </td>
-                                <td>
-                                    <button
                                         className="btn btn-danger"
                                         onClick={this.handleDelete.bind(this, value.id)}>
                                         Delete
@@ -99,7 +91,7 @@ class GetContest extends Component {
                                 </td>
                                 <td>
                                     <button
-                                        className="btn btn-danger"
+                                        className="btn btn-success"
                                         onClick={this.openLeaderboard.bind(this, value.id)}>
                                         Open
                                         </button>
