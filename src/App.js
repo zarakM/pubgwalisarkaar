@@ -4,11 +4,17 @@ import './App.css';
 import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
 import StartScreen from "./components/StartScreen";
+
+import Contests from "./components/Contests"
+import Videos from "./components/Videos"
+
 import Admin from "./adminComponent/Login"
 import DashboardAdmin from "./adminComponent/Dashboard"
+
 import CreateContest from "./adminComponent/CreateContest";
 import CreateVideos from "./adminComponent/CreateVideos";
 import CreateLeaderboard from "./adminComponent/CreateLeaderboard";
+
 import GetVideos from "./adminComponent/GetVideos";
 import GetContest from "./adminComponent/GetContest";
 import GetLeaderboard from "./adminComponent/GetLeaderboard";
@@ -16,7 +22,7 @@ import * as firebase from "firebase";
 
 
 import {
-  HashRouter,
+  BrowserRouter,
   Switch,
   Route
 } from 'react-router-dom';
@@ -26,8 +32,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <HashRouter>
-          <Switch><div>
+        <BrowserRouter>
+          <Switch>
             {/* admin route */}
             <Route path="/admin" component={Admin} />
             <Route path="/dashboard_admin" component={DashboardAdmin} />
@@ -39,21 +45,20 @@ class App extends Component {
             <Route path="/get_contest" component={GetContest} />
             <Route path="/get_leaderboard" component={GetLeaderboard} />
             <Route path="/get_videos" component={GetVideos} />
-          </div>
           </Switch>
-        </HashRouter >
-        <HashRouter>
+        </BrowserRouter >
+        <BrowserRouter>
           <Switch>
             {/* user route */}
-            <Route exact path="/" component={StartScreen} />
+            <Route path="/starter" component={StartScreen} />
+            <Route path="/" component={Contests} />
             <Route path="/login" component={SignIn} />
             <Route path="/register" component={SignUp} />
             <Route path="/my_contests" component={SignUp} />
             <Route path="/contests" component={SignUp} />
-            
+            <Route path="/videos" component={Videos} />
           </Switch>
-        </HashRouter >
-
+        </BrowserRouter >
       </div>
     );
   }

@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
+import Navbar from "./Navbar"
 
 
 class Contests extends Component {
-    constructor(){
+    constructor() {
         super()
-        this.state={
-            contests:[]
+        this.state = {
+            contests: []
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         let com = this;
         firebase
             .database()
@@ -27,17 +28,20 @@ class Contests extends Component {
                         quantity: childD.val().quantity
                     });
                 });
-                Array.prototype.push.apply(com.state.products, items);
+                Array.prototype.push.apply(com.state.contests, items);
                 com.setState({
-                    products: com.state.products
+                    contests: com.state.contests
                 });
             });
     }
-    render() { 
-        return ( 
-            <div></div>
-         );
+    render() {
+        return (
+            <div>
+                <Navbar />
+                <h1>sda</h1>
+            </div>
+        );
     }
 }
- 
+
 export default Contests;

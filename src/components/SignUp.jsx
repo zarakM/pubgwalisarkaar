@@ -15,14 +15,11 @@ class SignUp extends Component {
         e.preventDefault();
         console.log(this.email.value+" "+this.password.value);
         firebase.auth().createUserWithEmailAndPassword(this.email.value, this.password.value).then(()=>{
-            console.log("halo")
+            this.props.history.push("/")
         })
         .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-          });
+            alert(error)
+    });
     }
     render() {
         return (

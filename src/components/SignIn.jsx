@@ -13,6 +13,7 @@ class SignIn extends Component {
     signin=e=>{
         e.preventDefault()
         firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value).then(()=>{
+            this.props.history.push("/")
         }).catch(function(error) {
             alert(error.message)
           });

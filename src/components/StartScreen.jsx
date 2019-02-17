@@ -14,7 +14,7 @@ class StartScreen extends Component {
     render() { 
         return ( 
             <div id="root">
-                <img src={Logo} className="background" alt="pubg khelo" width="100%" height="700px"/>
+                <img src={Logo} className="background" alt="pubg khelo" width="100%" height="1000px"/>
                 <Link to="login"><button className="transparent_btn orange positioning" >Login</button></Link>
                 <Link to="register"><button className="transparent_btn orange positioning1">Register</button></Link>
             </div>
