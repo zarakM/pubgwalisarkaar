@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import "./css/footer.css"
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
