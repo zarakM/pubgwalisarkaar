@@ -1,0 +1,16 @@
+.card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    border-top: 0ch;
+    border-right: 0ch;
+    border-left: 0ch;
+    border-bottom: 1px solid thistle
+}
+
+.itemHead{
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color:brown
+}

@@ -6,20 +6,33 @@ class SignUp extends Component {
     constructor() {
         super()
         this.state = {
-            
+
         }
-        
+
     }
 
-    signup= e =>{
+    signup = e => {
         e.preventDefault();
-        console.log(this.email.value+" "+this.password.value);
-        firebase.auth().createUserWithEmailAndPassword(this.email.value, this.password.value).then(()=>{
-            this.props.history.push("/")
+        let com = this
+        firebase.auth().createUserWithEmailAndPassword(this.email.value, this.password.value).then(()=> {
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    firebase.database().ref().child("profiles/" + user.uid).set({
+                        email: com.email.value,
+                        coins: 0
+                    }).then(() => {
+                        com.email.value=""
+                        com.password.value=""
+                        com.props.history.push("/")
+                    }).catch(error=>{
+                        alert(error)
+                    })
+                }
+              });
         })
-        .catch(function(error) {
-            alert(error)
-    });
+            .catch(function (error) {
+                alert(error)
+            });
     }
     render() {
         return (
@@ -31,8 +44,8 @@ class SignUp extends Component {
                     </div>
 
                     <form onSubmit={this.signup}>
-                        <input type="text" id="login" className="fadeIn second" name="login" placeholder="login" ref={em => (this.email = em)}/>
-                        <input type="text" id="password" className="fadeIn third" name="login" placeholder="password" ref={em => (this.password = em)}/>
+                        <input type="text" id="login" className="fadeIn second" name="login" placeholder="login" ref={em => (this.email = em)} />
+                        <input type="text" id="password" className="fadeIn third" name="login" placeholder="password" ref={em => (this.password = em)} />
                         <input type="submit" className="fadeIn fourth" value="Register" />
                     </form>
                 </div>

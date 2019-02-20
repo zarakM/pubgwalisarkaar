@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
+import Profile from "./components/MyProfile"
 import StartScreen from "./components/StartScreen";
 
 import Contests from "./components/Contests"
+import MyContests from "./components/MyContests"
 import Videos from "./components/Videos"
 
+import Policies from "./components/Policies"
 import Admin from "./adminComponent/Login"
 import DashboardAdmin from "./adminComponent/Dashboard"
 
@@ -18,7 +20,6 @@ import CreateLeaderboard from "./adminComponent/CreateLeaderboard";
 import GetVideos from "./adminComponent/GetVideos";
 import GetContest from "./adminComponent/GetContest";
 import GetLeaderboard from "./adminComponent/GetLeaderboard";
-import * as firebase from "firebase";
 
 
 import {
@@ -35,28 +36,27 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             {/* admin route */}
-            <Route path="/admin" component={Admin} />
-            <Route path="/dashboard_admin" component={DashboardAdmin} />
+            <Route exact path="/admin" component={Admin} />
+            <Route exact path="/dashboard_admin" component={DashboardAdmin} />
             
-            <Route path="/create_contest" component={CreateContest} />
-            <Route path="/create_videos" component={CreateVideos} />
-            <Route path="/create_leaderboard" component={CreateLeaderboard} />
+            <Route exact path="/create_contest" component={CreateContest} />
+            <Route exact path="/create_videos" component={CreateVideos} />
+            <Route exact path="/create_leaderboard" component={CreateLeaderboard} />
             
-            <Route path="/get_contest" component={GetContest} />
-            <Route path="/get_leaderboard" component={GetLeaderboard} />
-            <Route path="/get_videos" component={GetVideos} />
-          </Switch>
-        </BrowserRouter >
-        <BrowserRouter>
-          <Switch>
-            {/* user route */}
-            <Route path="/starter" component={StartScreen} />
-            <Route path="/" component={Contests} />
-            <Route path="/login" component={SignIn} />
-            <Route path="/register" component={SignUp} />
-            <Route path="/my_contests" component={SignUp} />
-            <Route path="/contests" component={SignUp} />
-            <Route path="/videos" component={Videos} />
+            <Route exact path="/get_contest" component={GetContest} />
+            <Route exact path="/get_leaderboard" component={GetLeaderboard} />
+            <Route exact path="/get_videos" component={GetVideos} />
+
+            <Route exact path="/starter" component={StartScreen} />
+            <Route exact path="/" component={Contests} />
+            <Route exact path="/login" component={SignIn} />
+            <Route exact path="/register" component={SignUp} />
+            <Route exact path="/profile" component={Profile} />
+
+            <Route exact path="/my_contests" component={MyContests} />
+            <Route exact path="/contests" component={Contests} />
+            <Route exact path="/videos" component={Videos} />
+            <Route exact path="/policies" component={Policies} />
           </Switch>
         </BrowserRouter >
       </div>
