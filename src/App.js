@@ -4,7 +4,6 @@ import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
 import Profile from "./components/MyProfile"
 import StartScreen from "./components/StartScreen";
-import Board from "./components/Board";
 
 import Contests from "./components/Contests"
 import MyContests from "./components/MyContests"
@@ -28,9 +27,26 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import * as firebase from "firebase";
+
 
 
 class App extends Component { 
+  constructor(){
+    super()
+    this.state={
+    }
+
+    firebase.auth().onAuthStateChanged(user=>{
+      if(user){
+        console.log("signed in")
+      }
+      else{
+        console.log("hoala")
+        this.props.history.push("/starter")
+      }
+    })
+  }
   render() {
     return (
       <div>
@@ -54,8 +70,6 @@ class App extends Component {
             <Route exact path="/register" component={SignUp} />
             <Route exact path="/profile" component={Profile} />
             
-            <Route name="/ideas/:value" component={Board} />
-
 
             <Route exact path="/mine" component={MyContests} />
             <Route exact path="/contests" component={Contests} />

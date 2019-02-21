@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
-import Navbar from "./Navbar"
-import Footer from "./Footer"
 
 class Board extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            leaders:[]
+        this.state = {
+            leaders: []
         }
 
-        console.log(props.match.params.value)
+        console.log(this.props.id)
         let com = this;
-        this.setState({leaders:[]})
+        this.setState({ leaders: [] })
         firebase
             .database()
             .ref()
-            .child("leaderboard/"+this.props.match.params.value)
+            .child("leaderboard/" + this.props.id)
             .once("value", snap => {
                 let items = [];
                 snap.forEach(childD => {
@@ -33,10 +31,9 @@ class Board extends Component {
                 });
             });
     }
-    render() { 
-        return ( 
+    render() {
+        return (
             <div className="container">
-            <Navbar />
                 <br />
                 <h3> Contests</h3>
                 <br />
@@ -60,10 +57,10 @@ class Board extends Component {
                         ))}
                     </tbody>
                 </table>
-<br/> <Footer/>
+                <br />
             </div>
-         );
+        );
     }
 }
- 
+
 export default Board;

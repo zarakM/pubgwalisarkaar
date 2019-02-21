@@ -6,8 +6,8 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import LOgo from "./imgUtils/logonew.png"
 
 class Navbar extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       coins: 0
     }
@@ -18,7 +18,28 @@ class Navbar extends Component {
           com.setState({ coins: snap.val().coins })
         })
       }
+      else{
+        console.log("hoala")
+        this.context.history.push("/starter")
+      }
     })
+  }
+
+  componentDidMount(){
+    // firebase.auth().onAuthStateChanged(user=>{
+    //   if(user){
+    //     console.log("signed in")
+    //   }
+    //   else{
+    //     console.log("hoala")
+    //     this.props.history.push("/starter")
+    //   }
+    // })
+  }
+
+  logout = e => {
+    e.preventDefault()
+    firebase.auth().signOut()
   }
   render() {
     return (
@@ -40,7 +61,7 @@ class Navbar extends Component {
             </div>
           </div>
           <div class="form-inline my-2 my-lg-0">
-          <p style={{margin:"20px"}}>Coins: {this.state.coins}</p>
+            <p style={{ margin: "20px" }}>Coins: {this.state.coins}</p>
             <button class="btn btn-outline-light my-2 my-sm-0" onClick={this.logout}>Logout</button>
           </div >
         </nav>
