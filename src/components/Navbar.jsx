@@ -25,18 +25,6 @@ class Navbar extends Component {
     })
   }
 
-  componentDidMount(){
-    // firebase.auth().onAuthStateChanged(user=>{
-    //   if(user){
-    //     console.log("signed in")
-    //   }
-    //   else{
-    //     console.log("hoala")
-    //     this.props.history.push("/starter")
-    //   }
-    // })
-  }
-
   logout = e => {
     e.preventDefault()
     firebase.auth().signOut()

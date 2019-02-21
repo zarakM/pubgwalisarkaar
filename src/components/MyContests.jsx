@@ -21,6 +21,10 @@ class MyContests extends Component {
             if (user) {
                 com.setState({ user_id: user.uid })
             }
+            else {
+                console.log("hoala")
+                com.props.history.push("/starter")
+            }
         })
     }
 

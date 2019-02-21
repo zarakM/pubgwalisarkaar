@@ -20,32 +20,20 @@ import CreateLeaderboard from "./adminComponent/CreateLeaderboard";
 import GetVideos from "./adminComponent/GetVideos";
 import GetContest from "./adminComponent/GetContest";
 import GetLeaderboard from "./adminComponent/GetLeaderboard";
-
+import * as firebase from "firebase";
 
 import {
   BrowserRouter,
   Switch,
   Route
 } from 'react-router-dom';
-import * as firebase from "firebase";
-
 
 
 class App extends Component { 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state={
     }
-
-    firebase.auth().onAuthStateChanged(user=>{
-      if(user){
-        console.log("signed in")
-      }
-      else{
-        console.log("hoala")
-        this.props.history.push("/starter")
-      }
-    })
   }
   render() {
     return (

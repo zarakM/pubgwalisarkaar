@@ -7,9 +7,23 @@ import ContactUs from './ContactUs'
 import Faq from './Faq'
 import PrivacyPolicy from './PrivacyPolicy'
 import WorkWithUs from './WorkWithUs'
+import * as firebase from "firebase"
 
 class Policies extends Component {
     state = {}
+
+    componentDidMount(){
+        let com = this
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+            
+            }
+            else {
+                console.log("hoala")
+                com.props.history.push("/starter")
+            }
+        })
+    }
     render() {
         return (
             <div className="container">

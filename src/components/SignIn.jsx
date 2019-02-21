@@ -8,15 +8,21 @@ class SignIn extends Component {
         this.state = {
 
         }
+        let com = this
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                com.props.history.push("/")
+            }
+        })
     }
-    
-    signin=e=>{
+
+    signin = e => {
         e.preventDefault()
-        firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value).then(()=>{
+        firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value).then(() => {
             this.props.history.push("/")
-        }).catch(function(error) {
+        }).catch(function (error) {
             alert(error.message)
-          });
+        });
     }
     render() {
         return (
@@ -28,8 +34,8 @@ class SignIn extends Component {
                     </div>
 
                     <form onSubmit={this.signin}>
-                        <input type="text" id="login" className="fadeIn second" name="login" placeholder="login" ref={em => (this.email = em)}/>
-                        <input type="text" id="password" className="fadeIn third" name="login" placeholder="password" ref={em => (this.password = em)}/>
+                        <input type="text" id="login" className="fadeIn second" name="login" placeholder="login" ref={em => (this.email = em)} />
+                        <input type="text" id="password" className="fadeIn third" name="login" placeholder="password" ref={em => (this.password = em)} />
                         <input type="submit" className="fadeIn fourth" value="Log In" />
                     </form>
                 </div>

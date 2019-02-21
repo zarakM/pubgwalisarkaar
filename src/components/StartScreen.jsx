@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Logo from "../start.jpg";
 import "./css/startbutton.css";
 import { Link } from 'react-router-dom';
+import * as firebase from "firebase"
 
 
 class StartScreen extends Component {
@@ -10,6 +11,15 @@ class StartScreen extends Component {
         this.state={
 
         }
+        let com = this
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                    com.props.history.push("/")
+            }
+            else {
+                console.log("hoala")
+            }
+        })
     }
     render() { 
         return ( 

@@ -8,8 +8,20 @@ class Board extends Component {
             leaders: []
         }
 
+        let com = this
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                firebase.database().ref().child("profiles/" + user.uid).once("value", snap => {
+                    com.setState({ coins: snap.val().coins })
+                })
+            }
+            else {
+                console.log("hoala")
+                com.props.history.push("/starter")
+            }
+        })
+
         console.log(this.props.id)
-        let com = this;
         this.setState({ leaders: [] })
         firebase
             .database()

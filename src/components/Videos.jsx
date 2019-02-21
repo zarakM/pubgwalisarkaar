@@ -12,8 +12,16 @@ class Videos extends Component {
         this.state = {
             link: []
         }
-
         let com = this;
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+            }
+            else {
+                com.props.history.push("/starter")
+                console.log("hoala")
+            }
+        })
+
         firebase
             .database()
             .ref()

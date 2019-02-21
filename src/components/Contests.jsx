@@ -21,6 +21,9 @@ class Contests extends Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 com.setState({ user_id: user.uid })
+            }else {
+                console.log("hoala")
+                com.props.history.push("/starter")
             }
         })
     }
