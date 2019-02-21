@@ -4,6 +4,7 @@ import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
 import Profile from "./components/MyProfile"
 import StartScreen from "./components/StartScreen";
+import Board from "./components/Board";
 
 import Contests from "./components/Contests"
 import MyContests from "./components/MyContests"
@@ -52,8 +53,11 @@ class App extends Component {
             <Route exact path="/login" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
             <Route exact path="/profile" component={Profile} />
+            
+            <Route name="/ideas/:value" component={Board} />
 
-            <Route exact path="/my_contests" component={MyContests} />
+
+            <Route exact path="/mine" component={MyContests} />
             <Route exact path="/contests" component={Contests} />
             <Route exact path="/videos" component={Videos} />
             <Route exact path="/policies" component={Policies} />

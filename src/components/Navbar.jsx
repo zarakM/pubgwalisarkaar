@@ -24,7 +24,7 @@ class Navbar extends Component {
     return (
       <div id='root' className="container">
         <nav className="navbar navbar-expand-lg navbar-light text-white" style={{ backgroundColor: "#054e86" }} width="100px" height="50px">
-          <Link className="nav-link" to="/">
+          <Link className="nav-link" to="/starter">
             <img src={LOgo} alt="zarsh.co" height="50px" width="100px" />
           </Link>
 
@@ -34,7 +34,7 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <Link className="nav-link  text-white" to="/">Contests</Link>
-              <Link className="nav-link  text-white" to="/">My Contests</Link>
+              <Link className="nav-link  text-white" to="/mine">My Contests</Link>
               <Link className="nav-link  text-white" to="/videos">Videos</Link>
               <Link className="nav-link  text-white" to="/policies">Policies</Link>
             </div>

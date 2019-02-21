@@ -51,19 +51,18 @@ class Contests extends Component {
 
     Join(entry, id, e) {
         e.preventDefault()
-        let com = this
-        let joined = false
-        firebase.database().ref().child("contest_players/" + id)
-            .orderByChild("id").equalTo(this.state.user_id).once("value", snap => {
+        let joined = false;
+        firebase.database().ref().child("contest_players/" + this.state.user_id)
+            .orderByChild("id").equalTo(id).once("value", snap => {
                 snap.forEach(child => {
-                    if (child.val().id === this.state.user_id) {
+                    if (child.val().id === id) {
                         joined = true
                     }
                 })
             }).then(() => {
-                let com = this
-                if (joined) {alert("you have already joined this league")}
+                if (joined) { alert("you already joined this match")}
                 else {
+                    let com = this
                     firebase.database().ref().child("profiles/" + com.state.user_id).once('value', snap => {
                         let before_coins = snap.val().coins;
                         if (entry > before_coins) {
@@ -75,7 +74,7 @@ class Contests extends Component {
                                 var up = {}
                                 up["/profiles/" + com.state.user_id + "/coins"] = after_coins
                                 firebase.database().ref().update(up).then(() => {
-                                    firebase.database().ref().child("contest_players/" + id).push().set({ id: com.state.user_id })
+                                    firebase.database().ref().child("contest_players/" + this.state.user_id).push().set({ id })
                                     window.location.reload();
                                 }).catch(error => { alert(error) })
                             } else {
