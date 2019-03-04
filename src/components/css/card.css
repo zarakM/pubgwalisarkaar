@@ -1,17 +1,28 @@
 .card{
+    margin: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid thistle;
+    width: 600px;
+    height: 180px;
+}
+
+.images{
+    width: 180px;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+.rows{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
-    border-top: 0ch;
-    border-right: 0ch;
-    border-left: 0ch;
-    border-bottom: 1px solid thistle
 }
 
-.itemHead{
-    width: 100px;
-margin: auto;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    color:brown
+.items{
+    font-size: 40px;
+
 }

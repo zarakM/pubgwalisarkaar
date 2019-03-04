@@ -7,7 +7,6 @@ import Erangel from "./imgUtils/erangel.png"
 import "./css/card.css"
 import Board from "./Board"
 
-
 class Contests extends Component {
     constructor() {
         super()
@@ -21,7 +20,7 @@ class Contests extends Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 com.setState({ user_id: user.uid })
-            }else {
+            } else {
                 console.log("hoala")
                 com.props.history.push("/starter")
             }
@@ -43,7 +42,8 @@ class Contests extends Component {
                         type: childD.val().type,
                         entry: childD.val().entry,
                         map: childD.val().map,
-                        per_kill: childD.val().per_kill
+                        per_kill: childD.val().per_kill,
+                        winner: childD.val().winner
                     });
                 });
                 Array.prototype.push.apply(com.state.contests, items);
@@ -51,7 +51,6 @@ class Contests extends Component {
                     contests: com.state.contests
                 });
             });
-
     }
 
     Join(entry, id, e) {
@@ -96,29 +95,48 @@ class Contests extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div>
                 <Navbar />
-                {this.state.board ? <Board id={this.state.boardKey} /> :
+                <div className="card">
+                    <img className="images" src={Miramar} alt="hola" />
+                    <div className="rows">
+                        <div className=""> <p className="items">Per kill</p><p>sad</p></div>
+                        <div className=""><p>Chicken Dinner</p><p>asd</p></div>
+                        <div className=""> <p >Entry</p><p>asdsad</p></div>
+                    </div>
+                    <div className="rows">
+                        <div className=""> <p >Type</p><p>asdsd</p></div>
+                        <div className=""> <p style={{ color: "red" }}>asdasdas</p></div>
+                        <div className=""> <p style={{ color: "red" }}>asdasda</p></div>
+                        <div className=""><button className="button btn-info" onClick={this.Join.bind(this, "", "")}>Join</button></div>
+                    </div>
+                    <br />
+                </div>
+                {/* {this.state.board ? <Board id={this.state.boardKey} /> :
                     <div>
                         <br />
                         {this.state.contests.reverse()}
-                        {this.state.contests.map((items, key) => (
-                            <div>
-                                <div className="card" key={items.id}>
-                                    <div className="carditems"><img src={items.map === "Miramaar" ? Miramar : Erangel} alt="hola" width="110" height="70" /></div>
-                                    <div className="carditems"> <p className="itemHead" style={{ marginTop: "5px" }}>Type</p><p>{items.type}</p></div>
-                                    <div className="carditems"> <p className="itemHead" style={{ marginTop: "5px" }}>Date</p><p>{items.date}</p></div>
-                                    <div className="carditems"> <p className="itemHead" style={{ marginTop: "5px" }}>Time</p><p>{items.time}</p></div>
-                                    <div className="carditems"> <p className="itemHead" key={items.id} style={{ marginTop: "5px" }}>Entry</p><p>{items.entry}</p></div>
-                                    <div className="carditems"> <p className="itemHead" style={{ marginTop: "5px" }}>Per kill</p><p>{items.per_kill}</p></div>
-                                    <div className="carditems"> <p className="itemHead" style={{ marginTop: "5px" }}>Players</p><p>a</p></div>
-                                    <div className="carditems"><button className="button btn-info" key={items.id} onClick={this.Join.bind(this, items.entry, items.id)}>Join</button></div>
-                                    <div className="carditems"><button className="button btn-info" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button></div>
-                                </div><br /></div>
-                        ))}
-                        <br />
+                        <div>
+                            {this.state.contests.map((items, key) => (
+                                <div>
+                                    <div><img className="images col" src={items.map === "Miramaar" ? Miramar : Erangel} alt="hola" /></div>
+                                    <div className="row" key={items.id}>
+                                        <div className="col"> <p>Per kill</p><p>{items.per_kill}</p></div>
+                                        <div className="col"><p>Chicken Dinner</p><p>{items.winner}</p></div>
+                                        <div className="col"> <p key={items.id} >Entry</p><p>{items.entry}</p></div>
+                                        <div class="w-100"></div>
+                                        <div className="col"> <p >Type</p><p>{items.type}</p></div>
+                                        <div className="col"> <p>{items.date}</p></div>
+                                        <div className="col"> <p>{items.time}</p></div>
+                                        <div className="col"><button className="button btn-info" key={items.id} onClick={this.Join.bind(this, items.entry, items.id)}>Join</button></div>
+                                        <div className="col"><button className="button btn-info" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button></div>
+                                        <br />
+                                    </div></div>
+                            ))}
+                            <br />
+                        </div>
                     </div>
-                }
+                } */}
                 <Footer />
             </div>
         );

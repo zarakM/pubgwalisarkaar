@@ -10,7 +10,7 @@ class Footer extends Component {
 
     render() {
         return (
-            <div className="container" style={{backgroundColor:"#054e86",position:"fixed",bottom:"0px"}}>
+            <div style={{backgroundColor:"#424242",position:"fixed",bottom:"0px",width:"100%"}}>
                 <div className="flex-container">
                     <img src={fb} height="60px" style={{ margin: "10px" }} alt="youtube" />
                     

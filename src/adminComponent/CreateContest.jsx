@@ -34,7 +34,8 @@ class CreateContest extends Component {
                 entry: this.entry.value,
                 per_kill: this.per_kill.value,
                 date: this.date.value,
-                time: this.time.value
+                time: this.time.value,
+                winner: this.winner.value
             })
             this.map.value = "";
             this.type.value = "";
@@ -42,6 +43,7 @@ class CreateContest extends Component {
             this.per_kill.value = "";
             this.date.value = "";
             this.time.value = "";
+            this.winner.value = "";
         }).catch(error=>{
             alert("Error occured check your internet or refresh your page")
         })
@@ -121,6 +123,21 @@ class CreateContest extends Component {
                                 className="form-control"
                                 placeholder="Per kill"
                                 ref={eb => (this.per_kill = eb)}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">
+                            Chicken Dinner
+                    </label>
+                        <div className="col-sm-10">
+                            <input
+                                type="number"
+                                className="form-control"
+                                placeholder="Per kill"
+                                ref={eb => (this.winner = eb)}
                                 required
                             />
                         </div>

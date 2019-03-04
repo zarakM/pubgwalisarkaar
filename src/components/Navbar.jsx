@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as firebase from "firebase";
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import LOgo from "./imgUtils/logonew.png"
+import "./css/navbar.css"
 
 class Navbar extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Navbar extends Component {
           com.setState({ coins: snap.val().coins })
         })
       }
-      else{
+      else {
         console.log("hoala")
         this.context.history.push("/starter")
       }
@@ -31,28 +31,16 @@ class Navbar extends Component {
   }
   render() {
     return (
-      <div id='root' className="container">
-        <nav className="navbar navbar-expand-lg navbar-light text-white" style={{ backgroundColor: "#054e86" }} width="100px" height="50px">
-          <Link className="nav-link" to="/starter">
-            <img src={LOgo} alt="zarsh.co" height="50px" width="100px" />
-          </Link>
-
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <Link className="nav-link  text-white" to="/">Contests</Link>
-              <Link className="nav-link  text-white" to="/mine">My Contests</Link>
-              <Link className="nav-link  text-white" to="/videos">Videos</Link>
-              <Link className="nav-link  text-white" to="/policies">Policies</Link>
-            </div>
-          </div>
-          <div class="form-inline my-2 my-lg-0">
-            <p style={{ margin: "20px" }}>Coins: {this.state.coins}</p>
-            <button class="btn btn-outline-light my-2 my-sm-0" onClick={this.logout}>Logout</button>
-          </div >
-        </nav>
+      <div id='root'>
+        <h1 className="heading">PUBG KHELO</h1>
+        <div className="navbar">
+          <div className="items">My Battles</div>
+          <div className="items">Battle Ground</div>
+          <div className="items">Videos</div>
+        </div>
+        <div>
+        <button className="logout">Logout</button>
+        </div>
       </div>
     );
   }
