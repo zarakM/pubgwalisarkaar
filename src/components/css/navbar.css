@@ -1,59 +1,95 @@
 .heading{
     color: #424242;
-    font-size: 40px;
-    text-align: center;
-    margin-top: 20px;
+    font-size: 2em;
+    margin-left: 5em;
+    margin-top: 1.5%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin-bottom: 20px;
 }
 
 .navbar{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  align-items: center;    
     background-color: #424242;
     justify-content: center;
 }
 
 .items{
     color: white;
-    font-size: 27px;
+    font-size: 1.1em;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-top: 2px;
-    margin-bottom: 2px;
+    margin-left: 1.3em    
 }
 
 .items:hover{
-    font-size: 40px
+    /* scale: */
 }
 
 .logout{
     background-color: rgb(39, 129, 165);
     color: aliceblue;
-    float: left;
     position: relative;
     float: right;
     margin-right: 10px;
-    margin-top: -50px;
+    margin-top: 2%;
     border: 0px;
-    height: 40px;
-    width: 100px;
+    height: 30px;
+    width: 60px;
     border-radius: 10px
 }
 
-.container{
-    display: grid;
-    grid-template-columns: auto auto auto;
-
+.logouts{
+    background-color: teal;
+    color: aliceblue;
+    position: relative;
+    float: right;
+    margin-right: 10px;
+    margin-top:2%;
+    border: 0px;
+    height: 30px;
+    width: 10em;
+    border-radius: 10px
 }
-/* @media only screen and (min-width: 320px) and (max-width: 768px) {
-    .navbar {
-      width:100%;
+
+
+  @media(max-width:570px ){ 
+    .items{
+        color: white;
+        font-size: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        
+        margin: auto;
     }
-    .items {
-      width:100%;
-      float:none;
+    .logout{
+        background-color: rgb(39, 129, 165);
+        color: aliceblue;
+        position: relative;
+        float: right;
+        margin-right: 10px;
+        margin-top: 8%;
+        border: 0px;
+        height: 30px;
+        width: 6em;
+        border-radius: 10px
     }
-  } */
+    
+    .logouts{
+        background-color: teal;
+        color: aliceblue;
+        position: relative;
+        float: right;
+        margin-right: 10px;
+        margin-top: 3%;
+        border: 0px;
+        height: 30px;
+        width: 6em;
+        border-radius: 10px
+    }
+    .heading{
+        color: #424242;
+        font-size: 2em;
+        margin-left: 1em;
+        margin-top: 1.5%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        margin-bottom: 20px;
+    }
+  }

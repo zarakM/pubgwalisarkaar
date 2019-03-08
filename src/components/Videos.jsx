@@ -51,7 +51,7 @@ class Videos extends Component {
             }
         };
         return (
-            <div className="container"  >
+            <div>
             <Navbar/>
             <br/>
                 {this.state.link.map(items => (

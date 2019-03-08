@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import SignIn from "./components/SignIn"
-import SignUp from "./components/SignUp"
 import Profile from "./components/MyProfile"
-import StartScreen from "./components/StartScreen";
 
 import Contests from "./components/Contests"
 import MyContests from "./components/MyContests"
 import Videos from "./components/Videos"
 
 import Policies from "./components/Policies"
-import Admin from "./adminComponent/Login"
 import DashboardAdmin from "./adminComponent/Dashboard"
 
 import CreateContest from "./adminComponent/CreateContest";
@@ -20,7 +16,6 @@ import CreateLeaderboard from "./adminComponent/CreateLeaderboard";
 import GetVideos from "./adminComponent/GetVideos";
 import GetContest from "./adminComponent/GetContest";
 import GetLeaderboard from "./adminComponent/GetLeaderboard";
-import * as firebase from "firebase";
 
 import {
   BrowserRouter,
@@ -41,8 +36,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             {/* admin route */}
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/dashboard_admin" component={DashboardAdmin} />
+            <Route exact path="/admin" component={DashboardAdmin} />
             
             <Route exact path="/create_contest" component={CreateContest} />
             <Route exact path="/create_videos" component={CreateVideos} />
@@ -52,10 +46,7 @@ class App extends Component {
             <Route exact path="/get_leaderboard" component={GetLeaderboard} />
             <Route exact path="/get_videos" component={GetVideos} />
 
-            <Route exact path="/starter" component={StartScreen} />
             <Route exact path="/" component={Contests} />
-            <Route exact path="/login" component={SignIn} />
-            <Route exact path="/register" component={SignUp} />
             <Route exact path="/profile" component={Profile} />
             
 

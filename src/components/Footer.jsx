@@ -12,11 +12,11 @@ class Footer extends Component {
         return (
             <div style={{backgroundColor:"#424242",position:"fixed",bottom:"0px",width:"100%"}}>
                 <div className="flex-container">
-                    <img src={fb} height="60px" style={{ margin: "10px" }} alt="youtube" />
+                    <img src={fb} height="40px" style={{ margin: "10px" }} alt="youtube" />
                     
-                    <img src={ins} height="60px" style={{ margin: "10px" }} alt="youtube" />
+                    <img src={ins} height="40px" style={{ margin: "10px" }} alt="youtube" />
                     
-                    <img src={yt} height="60px" style={{ margin: "10px" }} alt="youtube" />
+                    <img src={yt} height="40px" style={{ margin: "10px" }} alt="youtube" />
                 </div>
             </div>
         )

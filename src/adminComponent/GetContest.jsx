@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
+import { withRouter } from 'react-router-dom';
 import Navbar from "./Navbar";
 
 class GetContest extends Component {
@@ -106,4 +107,4 @@ class GetContest extends Component {
     }
 }
  
-export default GetContest;
+export default withRouter(GetContest);

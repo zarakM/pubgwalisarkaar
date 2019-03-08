@@ -3,9 +3,10 @@ import * as firebase from "firebase";
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import Miramar from "./imgUtils/miramaar.png"
-import Erangel from "./imgUtils/erangel.png"
+import Erangel from "./imgUtils/erangel.jpg"
 import "./css/card.css"
 import Board from "./Board"
+
 
 class Contests extends Component {
     constructor() {
@@ -14,18 +15,20 @@ class Contests extends Component {
             contests: [],
             user_id: null,
             board: false,
-            boardKey: null
+            boardKey: null,
+            loggedIn:false,
         }
+
         let com = this
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                com.setState({ user_id: user.uid })
+                com.setState({ user_id: user.uid,loggedIn: true })
             } else {
-                console.log("hoala")
-                com.props.history.push("/starter")
+                com.setState({ loggedIn: false })
             }
         })
     }
+
     componentDidMount() {
         let com = this
         firebase
@@ -55,88 +58,83 @@ class Contests extends Component {
 
     Join(entry, id, e) {
         e.preventDefault()
-        let joined = false;
-        firebase.database().ref().child("contest_players/" + this.state.user_id)
-            .orderByChild("id").equalTo(id).once("value", snap => {
-                snap.forEach(child => {
-                    if (child.val().id === id) {
-                        joined = true
-                    }
-                })
-            }).then(() => {
-                if (joined) { alert("you already joined this match") }
-                else {
-                    let com = this
-                    firebase.database().ref().child("profiles/" + com.state.user_id).once('value', snap => {
-                        let before_coins = snap.val().coins;
-                        if (entry > before_coins) {
-                            alert("you dont have enough coin please buy some")
-                        } else {
-                            var answer = window.confirm(entry + " coins will be deduct from " + before_coins + " coins");
-                            if (answer) {
-                                let after_coins = before_coins - entry
-                                var up = {}
-                                up["/profiles/" + com.state.user_id + "/coins"] = after_coins
-                                firebase.database().ref().update(up).then(() => {
-                                    firebase.database().ref().child("contest_players/" + this.state.user_id).push().set({ id })
-                                    window.location.reload();
-                                }).catch(error => { alert(error) })
-                            } else {
-                            }
+        if(this.state.loggedIn===true){
+            let joined = false;
+            firebase.database().ref().child("contest_players/" + this.state.user_id)
+                .orderByChild("id").equalTo(id).once("value", snap => {
+                    snap.forEach(child => {
+                        if (child.val().id === id) {
+                            joined = true
                         }
                     })
-                }
-            })
+                }).then(() => {
+                    if (joined) { alert("you already joined this match") }
+                    else {
+                        let com = this
+                        firebase.database().ref().child("profiles/" + com.state.user_id).once('value', snap => {
+                            let before_coins = snap.val().coins;
+                            if (entry > before_coins) {
+                                alert("you dont have enough coin please buy some")
+                            } else {
+                                var answer = window.confirm(entry + " coins will be deduct from " + before_coins + " coins");
+                                if (answer) {
+                                    let after_coins = before_coins - entry
+                                    var up = {}
+                                    up["/profiles/" + com.state.user_id + "/coins"] = after_coins
+                                    firebase.database().ref().update(up).then(() => {
+                                        firebase.database().ref().child("contest_players/" + this.state.user_id).push().set({ id })
+                                        window.location.reload();
+                                    }).catch(error => { alert(error) })
+                                } else {
+                                }
+                            }
+                        })
+                    }
+                })
+        }
+        else{
+           alert("please logged in first") 
+        }
     }
 
     board = (id, e) => {
         e.preventDefault()
         this.setState({ board: true, boardKey: id })
     }
+
     render() {
         return (
             <div>
-                <Navbar />
-                <div className="card">
-                    <img className="images" src={Miramar} alt="hola" />
-                    <div className="rows">
-                        <div className=""> <p className="items">Per kill</p><p>sad</p></div>
-                        <div className=""><p>Chicken Dinner</p><p>asd</p></div>
-                        <div className=""> <p >Entry</p><p>asdsad</p></div>
-                    </div>
-                    <div className="rows">
-                        <div className=""> <p >Type</p><p>asdsd</p></div>
-                        <div className=""> <p style={{ color: "red" }}>asdasdas</p></div>
-                        <div className=""> <p style={{ color: "red" }}>asdasda</p></div>
-                        <div className=""><button className="button btn-info" onClick={this.Join.bind(this, "", "")}>Join</button></div>
-                    </div>
-                    <br />
-                </div>
-                {/* {this.state.board ? <Board id={this.state.boardKey} /> :
+                <Navbar />                        {this.state.contests.reverse()}
+                {this.state.board ? <Board id={this.state.boardKey} /> :
                     <div>
                         <br />
-                        {this.state.contests.reverse()}
                         <div>
                             {this.state.contests.map((items, key) => (
-                                <div>
-                                    <div><img className="images col" src={items.map === "Miramaar" ? Miramar : Erangel} alt="hola" /></div>
-                                    <div className="row" key={items.id}>
-                                        <div className="col"> <p>Per kill</p><p>{items.per_kill}</p></div>
-                                        <div className="col"><p>Chicken Dinner</p><p>{items.winner}</p></div>
-                                        <div className="col"> <p key={items.id} >Entry</p><p>{items.entry}</p></div>
-                                        <div class="w-100"></div>
-                                        <div className="col"> <p >Type</p><p>{items.type}</p></div>
-                                        <div className="col"> <p>{items.date}</p></div>
-                                        <div className="col"> <p>{items.time}</p></div>
-                                        <div className="col"><button className="button btn-info" key={items.id} onClick={this.Join.bind(this, items.entry, items.id)}>Join</button></div>
-                                        <div className="col"><button className="button btn-info" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button></div>
-                                        <br />
-                                    </div></div>
+                                <div key={key} className="ro">
+                                    <img className="images c-image" src={Erangel} alt="image" width="150px" height="150px" style={{ float: "left" }} />
+                                    <div className="card">
+                                        <div className="container-0 ">
+                                            <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
+                                            <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
+                                            <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
+                                            <div className="box3"> <p className="c-heading">Players</p><p>{items.entry}</p></div>
+                                        </div>
+                                        <div className="container-1">
+                                            <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
+                                            <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
+                                            <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
+                                            <div className="box7"> <p> <button onClick={this.Join.bind(this, items.entry, items.id)} className="btn btn-sm btn-outline-success">Join</button></p></div>
+                                            <div className="box8"> <p> <button className="bt-joinm">Join</button></p></div>
+                                            <div className="col"><button className="button btn-info" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button></div>
+                                        </div>
+                                    </div>
+                                </div>
                             ))}
                             <br />
                         </div>
                     </div>
-                } */}
+                }
                 <Footer />
             </div>
         );
