@@ -16,13 +16,13 @@ class Contests extends Component {
             user_id: null,
             board: false,
             boardKey: null,
-            loggedIn:false,
+            loggedIn: false,
         }
 
         let com = this
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                com.setState({ user_id: user.uid,loggedIn: true })
+                com.setState({ user_id: user.uid, loggedIn: true })
             } else {
                 com.setState({ loggedIn: false })
             }
@@ -38,6 +38,17 @@ class Contests extends Component {
             .once("value", snap => {
                 let items = [];
                 snap.forEach(childD => {
+                    let button;
+                    var datum = new Date(childD.val().date + " " + childD.val().time+":00");
+                    let timestamp = datum.getTime();
+                    let date = new Date();
+                    let now = date.getTime();
+                    console.log(timestamp+" - "+now)
+                    if (timestamp > now) {
+                        button = true
+                    } else {
+                        button = false
+                    }
                     items.push({
                         id: childD.key,
                         date: childD.val().date,
@@ -46,7 +57,8 @@ class Contests extends Component {
                         entry: childD.val().entry,
                         map: childD.val().map,
                         per_kill: childD.val().per_kill,
-                        winner: childD.val().winner
+                        winner: childD.val().winner,
+                        button
                     });
                 });
                 Array.prototype.push.apply(com.state.contests, items);
@@ -58,7 +70,7 @@ class Contests extends Component {
 
     Join(entry, id, e) {
         e.preventDefault()
-        if(this.state.loggedIn===true){
+        if (this.state.loggedIn === true) {
             let joined = false;
             firebase.database().ref().child("contest_players/" + this.state.user_id)
                 .orderByChild("id").equalTo(id).once("value", snap => {
@@ -92,8 +104,8 @@ class Contests extends Component {
                     }
                 })
         }
-        else{
-           alert("please logged in first") 
+        else {
+            alert("please logged in first")
         }
     }
 
@@ -124,9 +136,9 @@ class Contests extends Component {
                                             <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
                                             <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
                                             <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
-                                            <div className="box7"> <p> <button onClick={this.Join.bind(this, items.entry, items.id)} className="btn btn-sm btn-outline-success">Join</button></p></div>
-                                            <div className="box8"> <p> <button className="bt-joinm">Join</button></p></div>
-                                            <div className="col"><button className="button btn-info" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button></div>
+                                            <div className="box7" key={items.id}>{items.button ? <button key={items.id} className="btn btn-sm btn-outline-success">Join</button>
+                                                : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button>}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -26,9 +26,8 @@ class Navbar extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         firebase.database().ref().child("profiles/" + user.uid).once("value", snap => {
-          com.setState({ coins: snap.val().coins })
+          com.setState({ coins: snap.val().coins ,loggedIn: true})
         })
-        com.setState({ loggedIn: true })
       }
       else {
         com.setState({ loggedIn: false })
