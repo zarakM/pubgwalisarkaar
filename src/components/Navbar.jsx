@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import * as firebase from "firebase";
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import "./css/navbar.css"
+import "./css/navbar.css"; 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogTitle from '@material-ui/core/DialogTitle'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrophy,faVideo,faFistRaised,faCrosshairs,faMedal,faStarAndCrescent,faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 class Navbar extends Component {
   constructor(props) {
@@ -106,11 +108,22 @@ class Navbar extends Component {
             <button className="logouts" onClick={this.buycoins}>{"Coins: " + this.state.coins}</button>
           </div>
         </div>
-        <div className="navbar">
-          <Link to="/mine" className="items">My Battles</Link>
-          <Link to="/contests" className="items">Battle Ground</Link>
-          <Link to="/videos" className="items">Videos</Link >
+        <div className="navbar nav-web">          
+        <Link to="/videos" className="items"><FontAwesomeIcon icon={faStarAndCrescent}/> SPECIAL EVENT</Link >
+          <Link to="/contests" className="items"><FontAwesomeIcon icon={faTrophy}/> BATTLE GROUNDS</Link>
+          <Link to="/mine" className="items"><FontAwesomeIcon icon={faCrosshairs}/> MY BATTLES</Link>  
+          <Link to="/videos" className="items"><FontAwesomeIcon icon={faMedal}/> TOP PLAYERS</Link >
+          <Link to="/videos" className="items"><FontAwesomeIcon icon={faVideo}/> VIDEOS</Link >
+          <Link to="/videos" className="items"><FontAwesomeIcon icon={faUserCircle}/> PROFILE</Link >
         </div>
+        <div className="navbar nav-mobile ">          
+        <Link to="/videos" className="items"><FontAwesomeIcon icon={faStarAndCrescent}/></Link >
+          <Link to="/contests" className="items"><FontAwesomeIcon icon={faTrophy}/></Link>
+          <Link to="/mine" className="items"><FontAwesomeIcon icon={faCrosshairs}/></Link>  
+          <Link to="/videos" className="items"><FontAwesomeIcon icon={faMedal}/></Link >
+          <Link to="/videos" className="items"><FontAwesomeIcon icon={faVideo}/></Link >
+          <Link to="/videos" className="items"><FontAwesomeIcon icon={faUserCircle}/></Link >
+        </div>         
       </div>
     );
   }
