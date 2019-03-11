@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link,withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import * as firebase from "firebase";
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
@@ -23,18 +23,10 @@ class Navbar extends Component {
     let com = this
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user.email+"sda")
-        if(user.email==="sarfraj@admin.com"){
-          com.setState({ loggedIn: true })
-        }
-        else{
-          com.setState({ loggedIn: false })
-          com.props.history.push("/admin")
-        }
+        com.setState({ loggedIn: true })
       }
       else {
-        console.log("sda")
-        com.props.history.push("/admin")
+        com.setState({ loggedIn: false })
       }
     })
   }
@@ -70,7 +62,7 @@ class Navbar extends Component {
   render() {
     return (
       <div id='root' className="container">
-      <div>
+        <div>
           <Dialog
             open={this.state.open}
             onClose={this.handleClose}
@@ -104,13 +96,13 @@ class Navbar extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-            <Link className="nav-link" to="/create_contest">Create Contest</Link>
-            <Link className="nav-link" to="/create_videos">Create Videos</Link>
-            <Link className="nav-link" to="/create_leaderboard">Update LeaderBoard</Link>
-            <Link className="nav-link" to="/get_videos">Get Videos</Link>
-            <Link className="nav-link" to="/get_contest">Get Contest</Link>
-            <Link className="nav-link" to="/get_leaderboard">Get LeaderBoard</Link>
-            <button className="btn btn-info" onClick={this.logout}>{this.state.loggedIn ? "Logout" : "Login"}</button>
+              <Link className="nav-link" to="/create_contest">Create Contest</Link>
+              <Link className="nav-link" to="/create_videos">Create Videos</Link>
+              <Link className="nav-link" to="/create_leaderboard">Update LeaderBoard</Link>
+              <Link className="nav-link" to="/get_videos">Get Videos</Link>
+              <Link className="nav-link" to="/get_contest">Get Contest</Link>
+              <Link className="nav-link" to="/get_leaderboard">Get LeaderBoard</Link>
+              <button className="btn btn-info" onClick={this.logout}>{this.state.loggedIn ? "Logout" : "Login"}</button>
 
             </div>
           </div>
