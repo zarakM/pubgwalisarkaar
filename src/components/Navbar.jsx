@@ -100,16 +100,15 @@ class Navbar extends Component {
             </DialogActions>
           </Dialog>
         </div>
-        <div className="top-head">
-        <div style={{display:"flex",}}>
-          <div style={{flex:""}}>
-            <h1 className=" "><img src={logo} width="160px" height="40px"/></h1>
-          </div> 
-          <div classname="btn-top" style={{flex:"wrap"}}>          
-            <button className="logout" onClick={this.logout}>{this.state.loggedIn ? "LOGOUT" : "LOGIN"}</button>
-            <button className="logouts" onClick={this.buycoins}><FontAwesomeIcon icon={faMoneyBillAlt}/> {this.state.coins}</button>
-          </div>         
-        </div>
+        <div className="top-head">   
+          <div >
+            <img className="logo" src={logo} width="220px" height="60px"/>
+            <div classname="btn-top">          
+          <button className="coins" onClick={this.buycoins}><FontAwesomeIcon icon={faMoneyBillAlt}/> {this.state.coins}</button>
+          <button className="logout" onClick={this.logout}>{this.state.loggedIn ? "LOGOUT" : "LOGIN"}</button>    
+       </div>
+          </div>
+         
         </div>
         <div className="navbar nav-web">          
         <Link to="/videos" className="items"><FontAwesomeIcon icon={faStarAndCrescent}/> SPECIAL EVENT</Link >
@@ -118,7 +117,8 @@ class Navbar extends Component {
           <Link to="/videos" className="items"><FontAwesomeIcon icon={faMedal}/> TOP PLAYERS</Link >
           <Link to="/videos" className="items"><FontAwesomeIcon icon={faVideo}/> VIDEOS</Link >
           <Link to="/profile" className="items"><FontAwesomeIcon icon={faUserCircle}/> PROFILE</Link >
-        </div>
+          </div>
+          
         <div className="navbar nav-mobile ">          
         <Link to="/videos" className="items"><FontAwesomeIcon icon={faStarAndCrescent}/></Link >
           <Link to="/contests" className="items"><FontAwesomeIcon icon={faTrophy}/></Link>

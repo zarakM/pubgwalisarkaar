@@ -3,7 +3,6 @@ import * as firebase from "firebase";
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 import avatar from './imgUtils/me.png';
-import classNames from 'classnames';
 import "./css/profile.css";
 import TextField from '@material-ui/core/TextField';
 
