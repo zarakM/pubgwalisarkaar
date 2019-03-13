@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import * as firebase from "firebase";
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import "./css/navbar.css"; 
+import "./css/navbar.css";
+import logo from './imgUtils/pws-logo.png' 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,7 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrophy,faVideo,faFistRaised,faCrosshairs,faMedal,faStarAndCrescent,faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTrophy,faVideo,faFistRaised,faCrosshairs,faMedal,faStarAndCrescent,faUserCircle,faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
 
 class Navbar extends Component {
   constructor(props) {
@@ -99,14 +100,16 @@ class Navbar extends Component {
             </DialogActions>
           </Dialog>
         </div>
+        <div className="top-head">
         <div style={{display:"flex",}}>
-          <div style={{flex:"1"}}>
-            <h1 className="heading">PUBG KHELO</h1>
-          </div>
-          <div style={{flex:"1",width:"40%"}}>          
-            <button className="logout" onClick={this.logout}>{this.state.loggedIn ? "Logout" : "Login"}</button>
-            <button className="logouts" onClick={this.buycoins}>{"Coins: " + this.state.coins}</button>
-          </div>
+          <div style={{flex:""}}>
+            <h1 className=" "><img src={logo} width="160px" height="40px"/></h1>
+          </div> 
+          <div classname="btn-top" style={{flex:"wrap"}}>          
+            <button className="logout" onClick={this.logout}>{this.state.loggedIn ? "LOGOUT" : "LOGIN"}</button>
+            <button className="logouts" onClick={this.buycoins}><FontAwesomeIcon icon={faMoneyBillAlt}/> {this.state.coins}</button>
+          </div>         
+        </div>
         </div>
         <div className="navbar nav-web">          
         <Link to="/videos" className="items"><FontAwesomeIcon icon={faStarAndCrescent}/> SPECIAL EVENT</Link >
@@ -114,7 +117,7 @@ class Navbar extends Component {
           <Link to="/mine" className="items"><FontAwesomeIcon icon={faCrosshairs}/> MY BATTLES</Link>  
           <Link to="/videos" className="items"><FontAwesomeIcon icon={faMedal}/> TOP PLAYERS</Link >
           <Link to="/videos" className="items"><FontAwesomeIcon icon={faVideo}/> VIDEOS</Link >
-          <Link to="/videos" className="items"><FontAwesomeIcon icon={faUserCircle}/> PROFILE</Link >
+          <Link to="/profile" className="items"><FontAwesomeIcon icon={faUserCircle}/> PROFILE</Link >
         </div>
         <div className="navbar nav-mobile ">          
         <Link to="/videos" className="items"><FontAwesomeIcon icon={faStarAndCrescent}/></Link >
@@ -122,7 +125,7 @@ class Navbar extends Component {
           <Link to="/mine" className="items"><FontAwesomeIcon icon={faCrosshairs}/></Link>  
           <Link to="/videos" className="items"><FontAwesomeIcon icon={faMedal}/></Link >
           <Link to="/videos" className="items"><FontAwesomeIcon icon={faVideo}/></Link >
-          <Link to="/videos" className="items"><FontAwesomeIcon icon={faUserCircle}/></Link >
+          <Link to="/profile" className="items"><FontAwesomeIcon icon={faUserCircle}/></Link >
         </div>         
       </div>
     );

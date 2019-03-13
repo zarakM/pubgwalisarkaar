@@ -1,0 +1,22 @@
+.avatar{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;   
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 3%;
+}
+
+.pro-field{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.textField{
+     
+    width: 100%;
+}
+

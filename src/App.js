@@ -50,7 +50,7 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
             
 
-            <Route exact path="/mine" component={MyContests} />
+            <Route exact path="/mycontests" component={MyContests} />
             <Route exact path="/contests" component={Contests} />
             <Route exact path="/videos" component={Videos} />
             <Route exact path="/policies" component={Policies} />
