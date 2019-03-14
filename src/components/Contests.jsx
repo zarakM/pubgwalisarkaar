@@ -14,7 +14,6 @@ class Contests extends Component {
         this.state = {
             contests: [],
             user_id: null,
-            board: false,
             boardKey: null,
             loggedIn: false,
         }
@@ -39,11 +38,11 @@ class Contests extends Component {
                 let items = [];
                 snap.forEach(childD => {
                     let button;
-                    var datum = new Date(childD.val().date + " " + childD.val().time+":00");
+                    var datum = new Date(childD.val().date + " " + childD.val().time + ":00");
                     let timestamp = datum.getTime();
                     let date = new Date();
                     let now = date.getTime();
-                    console.log(timestamp+" - "+now)
+                    console.log(timestamp + " - " + now)
                     if (timestamp > now) {
                         button = true
                     } else {
@@ -111,42 +110,41 @@ class Contests extends Component {
 
     board = (id, e) => {
         e.preventDefault()
-        this.setState({ board: true, boardKey: id })
+        this.props.history.push("/board/"+id);
     }
 
     render() {
         return (
             <div>
-                <Navbar />                        {this.state.contests.reverse()}
-                {this.state.board ? <Board id={this.state.boardKey} /> :
+                <Navbar />
+                {this.state.contests.reverse()}
+                <div>
+                    <br />
                     <div>
-                        <br />
-                        <div>
-                            {this.state.contests.map((items, key) => (
-                                <div key={key} className="ro">
-                                    <img className="images c-image" src={Erangel} alt="image" width="150px" height="150px" style={{ float: "left" }} />
-                                    <div className="card">
-                                        <div className="container-0 ">
-                                            <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
-                                            <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
-                                            <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
-                                            <div className="box3"> <p className="c-heading">Players</p><p>{items.entry}</p></div>
-                                        </div>
-                                        <div className="container-1">
-                                            <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
-                                            <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
-                                            <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
-                                            <div className="box7" key={items.id}>{items.button ? <button key={items.id} className="btn btn-sm btn-outline-success">Join</button>
-                                                : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button>}
-                                            </div>
+                        {this.state.contests.map((items, key) => (
+                            <div key={key} className="ro">
+                                <img className="images c-image" src={Erangel} alt="image" width="150px" height="150px" style={{ float: "left" }} />
+                                <div className="card">
+                                    <div className="container-0 ">
+                                        <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
+                                        <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
+                                        <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
+                                        <div className="box3"> <p className="c-heading">Players</p><p>{items.entry}</p></div>
+                                    </div>
+                                    <div className="container-1">
+                                        <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
+                                        <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
+                                        <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
+                                        <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Join.bind(this, items.entry, items.id)} className="btn btn-sm btn-outline-success">Join</button>
+                                            : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button>}
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-                            <br />
-                        </div>
+                            </div>
+                        ))}
+                        <br />
                     </div>
-                }
+                </div>
                 <Footer />
             </div>
         );

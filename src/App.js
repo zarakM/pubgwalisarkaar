@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Profile from "./components/MyProfile"
+import Board from "./components/Board"
 
 import Contests from "./components/Contests"
 import MyContests from "./components/MyContests"
@@ -48,6 +49,7 @@ class App extends Component {
 
             <Route exact path="/" component={Contests} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/board/:id" component={Board} />
             
 
             <Route exact path="/mycontests" component={MyContests} />

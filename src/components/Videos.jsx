@@ -17,7 +17,7 @@ class Videos extends Component {
             if (user) {
             }
             else {
-                com.props.history.push("/starter")
+                com.props.history.push("/")
                 console.log("hoala")
             }
         })

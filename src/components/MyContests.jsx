@@ -13,7 +13,6 @@ class MyContests extends Component {
         this.state = {
             mine: [],
             user_id: null,
-            board: false,
             boardKey: null
         }
         let com = this
@@ -56,43 +55,41 @@ class MyContests extends Component {
 
                     });
                 })
-            , 1000)
+            , 5000)
     }
 
-    board = (id, e) => {
+    Leaderboard = (id, e) => {
         e.preventDefault()
-        this.setState({ board: true, boardKey: id })
+        this.props.history.push("/board/" + id);
     }
 
     render() {
         return (
             <div>
                 <Navbar />
-                {this.state.board ? <Board id={this.state.boardKey} /> :
-                    <div>
-                        <br />
-                        {this.state.mine.map((items, key) => (
-                                <div key={key} className="ro">
-                                    <img className="images c-image" src={Erangel} alt="image" width="150px" height="150px" style={{ float: "left" }} />
-                                    <div className="card">
-                                        <div className="container-0 ">
-                                            <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
-                                            <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
-                                            <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
-                                            <div className="box3"> <p className="c-heading">Players</p><p>{items.entry}</p></div>
-                                        </div>
-                                        <div className="container-1">
-                                            <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
-                                            <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
-                                            <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
-                                            <div className="box6"> <button type="button" className="btn btn-info btn-sm">Leaderboard</button></div>
-                                        </div>
-                                    </div>
+                <div>
+                    <br />
+                    {this.state.mine.map((items, key) => (
+                        <div key={key} className="ro">
+                            <img className="images c-image" src={Erangel} alt="image" width="150px" height="150px" style={{ float: "left" }} />
+                            <div className="card">
+                                <div className="container-0 ">
+                                    <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
+                                    <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
+                                    <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
+                                    <div className="box3"> <p className="c-heading">Players</p><p>{items.entry}</p></div>
                                 </div>
-                            ))}
-                        <br />
-                    </div>
-                }
+                                <div className="container-1">
+                                    <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
+                                    <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
+                                    <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
+                                    <div className="box6"> <button type="button" key={items.id} onClick={this.Leaderboard.bind(this, items.id)} className="btn btn-info btn-sm">Leaderboard</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    <br />
+                </div>
                 <br />
                 <Footer />
             </div>

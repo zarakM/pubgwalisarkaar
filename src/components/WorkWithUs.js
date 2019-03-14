@@ -14,7 +14,7 @@ class WorkWithUS extends Component{
 
 Drop us an email @ career@pubkhelo.com
 
-We are small but growing fast and want to change the e-sports landscape in India.</p>
+We are small but growing fast and want to change the e-sports landscape in Pakistan.</p>
         </div>
         </div>
         )

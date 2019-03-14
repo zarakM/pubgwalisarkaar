@@ -1,0 +1,12 @@
+.videos{
+    width:50%;
+    margin-left: 25%
+}
+
+@media(max-width:570px ){ 
+    .videos{
+        width:90%;
+        margin-left: 5%;
+        margin-right: 5%
+    }
+}
