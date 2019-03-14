@@ -20,6 +20,7 @@ class Navbar extends Component {
     this.state = {
       coins: 0,
       open: false,
+      openR: false,
       loggedIn: false
     }
   }
@@ -38,31 +39,33 @@ class Navbar extends Component {
     })
   }
 
+
   logout = e => {
     e.preventDefault()
     let com = this
     if (com.state.loggedIn === true) {
       firebase.auth().signOut().then(() => { com.setState({ loggedIn: false }) })
     } else {
-      com.setState({ loggedIn: true, open: true })
+      com.setState({ open: true })
     }
   }
 
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ open: true, openR: false });
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, openR: false });
   };
 
   handleLogin = e => {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(this.name.value, this.password.value).catch(function (error) {
+    firebase.auth().signInWithEmailAndPassword(this.name.value, this.password.value).then(() => {
+      this.setState({ open: false, loggedIn: true });
+    }).catch(function (error) {
       var errorMessage = error.message;
       alert(errorMessage)
     })
-    this.setState({ open: false });
   }
 
   buycoins = e => {
@@ -70,35 +73,126 @@ class Navbar extends Component {
     alert("please paytm money to +9769769")
   }
 
+  handleRegister = e => {
+    e.preventDefault();
+    let com = this
+    firebase.auth().createUserWithEmailAndPassword(this.email.value, this.passwords.value).catch(function (error) {
+      var errorMessage = error.message;
+      alert(errorMessage)
+    }).then(() => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          firebase.database().ref().child("profiles/" + user.uid).set({
+            email: this.email.value,
+            name: this.names.value,
+            clan: this.clan.value,
+            pubg_id: this.pubg_id.value,
+            number: this.number.value,
+            rating:0,
+            coins: 0
+          }).then(() => {
+            alert("Successfully registered and Logged in")
+            com.setState({ openR: false, loggedIn: true })
+          })
+        }
+        else{
+
+        }
+      })
+    })
+  }
+
+  handleRegisters = e => {
+    e.preventDefault()
+    this.setState({ openR: true })
+  }
+
   render() {
     return (
       <div id='root'>
         <div>
-          <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">LOGIN</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                inputRef={ec => (this.name = ec)}
-                label="Name"
-                type="name"
-                fullWidth />
-              <TextField
-                margin="dense"
-                inputRef={ec => (this.password = ec)}
-                label="password"
-                type="password"
-                fullWidth />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">Cancel</Button>
-              <Button onClick={this.handleLogin} color="primary">Sign In</Button>
-            </DialogActions>
-          </Dialog>
+          <div>
+            <Dialog
+              open={this.state.openR}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title">
+              {/* Register */}
+
+              <DialogTitle id="form-dialog-title">Register</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  inputRef={ec => (this.names = ec)}
+                  label="Name"
+                  type="name"
+                  fullWidth />
+                <TextField
+                  margin="dense"
+                  inputRef={ec => (this.email = ec)}
+                  label="Email"
+                  type="email"
+                  fullWidth />
+                <TextField
+                  margin="dense"
+                  inputRef={ec => (this.clan = ec)}
+                  label="Clan"
+                  type="name"
+                  fullWidth />
+                <TextField
+                  margin="dense"
+                  inputRef={ec => (this.pubg_id = ec)}
+                  label="PUBG ID"
+                  type="name"
+                  fullWidth />
+                <TextField
+                  margin="dense"
+                  inputRef={ec => (this.number = ec)}
+                  label="Number"
+                  type="number"
+                  fullWidth />
+                <TextField
+                  margin="dense"
+                  inputRef={ec => (this.passwords = ec)}
+                  label="password"
+                  type="password"
+                  fullWidth />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClickOpen} color="primary">Sign In</Button>
+                <Button onClick={this.handleClose} color="primary">Cancel</Button>
+                <Button onClick={this.handleRegister} color="primary">Register</Button>
+              </DialogActions>
+            </Dialog>
+
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title">
+              {/* Sign in */}
+              <DialogTitle id="form-dialog-title">LOGIN</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  inputRef={ec => (this.name = ec)}
+                  label="Name"
+                  type="name"
+                  fullWidth />
+                <TextField
+                  margin="dense"
+                  inputRef={ec => (this.password = ec)}
+                  label="password"
+                  type="password"
+                  fullWidth />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleRegisters} color="primary">Register</Button>
+                <Button onClick={this.handleClose} color="primary">Cancel</Button>
+                <Button onClick={this.handleLogin} color="primary">Sign In</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
         </div>
         <div className="top-head">
           <div >

@@ -15,7 +15,7 @@ class Board extends Component {
             if (user) {
             }
             else {
-                com.props.history.push("/starter")
+                com.props.history.push("/")
             }
         })
 

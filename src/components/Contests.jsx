@@ -104,13 +104,19 @@ class Contests extends Component {
                 })
         }
         else {
-            alert("please logged in first")
+            if (this.state.loggedIn === true) {
+                alert("please logged in first")
+            }
+            else {
+                alert("please logged in first")
+            }
         }
     }
 
     board = (id, e) => {
         e.preventDefault()
-        this.props.history.push("/board/"+id);
+
+        this.props.history.push("/board/" + id);
     }
 
     render() {

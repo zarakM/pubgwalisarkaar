@@ -15,7 +15,7 @@ var config = {
   authDomain: "pubgwalisarkaar.firebaseapp.com",
   databaseURL: "https://pubgwalisarkaar.firebaseio.com",
   projectId: "pubgwalisarkaar",
-  storageBucket: "",
+  storageBucket: "gs://pubgwalisarkaar.appspot.com",
   messagingSenderId: "145673301743"
 };
 

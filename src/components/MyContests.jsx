@@ -37,6 +37,17 @@ class MyContests extends Component {
                         let items = []
                         let contest_id = childD.val().id
                         firebase.database().ref().child("contests/" + contest_id).once("value", snaps => {
+                            let button;
+                            var datum = new Date(snaps.val().date + " " + snaps.val().time + ":00");
+                            let timestamp = datum.getTime();
+                            let date = new Date();
+                            let now = date.getTime();
+                            console.log(timestamp + " - " + now)
+                            if (timestamp > now) {
+                                button = true
+                            } else {
+                                button = false
+                            }
                             items.push({
                                 id: snaps.key,
                                 date: snaps.val().date,
@@ -45,7 +56,8 @@ class MyContests extends Component {
                                 entry: snaps.val().entry,
                                 map: snaps.val().map,
                                 per_kill: snaps.val().per_kill,
-                                winner: childD.val().winner
+                                winner: childD.val().winner,
+                                button
                             });
                             Array.prototype.push.apply(com.state.mine, items);
                             com.setState({
@@ -63,6 +75,13 @@ class MyContests extends Component {
         this.props.history.push("/board/" + id);
     }
 
+    Details = (id, e) => {
+        e.preventDefault()
+        firebase.database().ref().child("details/"+id).once('value',snap=>{
+            alert("RoomId: "+ snap.val().id +" RoomPassword: "+snap.val().password)
+        })
+    }
+
     render() {
         return (
             <div>
@@ -71,7 +90,7 @@ class MyContests extends Component {
                     <br />
                     {this.state.mine.map((items, key) => (
                         <div key={key} className="ro">
-                            <img className="images c-image" src={Erangel} alt="image" width="150px" height="150px" style={{ float: "left" }} />
+                            <img className="images c-image" src={Erangel} alt="pubg map" width="150px" height="150px" style={{ float: "left" }} />
                             <div className="card">
                                 <div className="container-0 ">
                                     <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
@@ -83,8 +102,9 @@ class MyContests extends Component {
                                     <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
                                     <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
                                     <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
-                                    <div className="box6"> <button type="button" key={items.id} onClick={this.Leaderboard.bind(this, items.id)} className="btn btn-info btn-sm">Leaderboard</button></div>
-                                </div>
+                                    <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Details.bind(this, items.id)} className="btn btn-sm btn-outline-success">Details</button>
+                                        : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.Leaderboard.bind(this, items.id)}>LeaderBoard</button>}
+                                    </div>                                </div>
                             </div>
                         </div>
                     ))}
