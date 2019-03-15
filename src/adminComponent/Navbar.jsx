@@ -23,17 +23,16 @@ class Navbar extends Component {
     let com = this
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user.email+"sda")
-        if(user.email==="sarfraj@admin.com"){
+        if(user.email==="admin@a.com"){
           com.setState({ loggedIn: true })
         }
         else{
           com.setState({ loggedIn: false })
+          firebase.auth().signOut()
           com.props.history.push("/admin")
         }
       }
       else {
-        console.log("sda")
         com.props.history.push("/admin")
       }
     })
