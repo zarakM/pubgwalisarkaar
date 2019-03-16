@@ -1,0 +1,16 @@
+.abt-header{
+    width: 62%;
+    padding-top: 5px;
+     
+}
+    body{
+
+        padding-top: 120px;
+    }
+
+    @media( max-width:571px){
+
+        .abt-header{
+            width: 100%;
+        }
+    }

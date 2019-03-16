@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import './App.css';
 import Profile from "./components/MyProfile"
 
 import Contests from "./components/Contests"
 import MyContests from "./components/MyContests"
 import Videos from "./components/Videos"
+import AboutContest from "./components/AboutContest"
 
 import Policies from "./components/Policies"
 import DashboardAdmin from "./adminComponent/Dashboard"
@@ -18,7 +19,7 @@ import GetContest from "./adminComponent/GetContest";
 import GetLeaderboard from "./adminComponent/GetLeaderboard";
 
 import {
-  BrowserRouter,
+  BrowserRouter,  
   Switch,
   Route
 } from 'react-router-dom';
@@ -48,6 +49,7 @@ class App extends Component {
 
             <Route exact path="/" component={Contests} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/aboutcontest" component={AboutContest} />
             
 
             <Route exact path="/mycontests" component={MyContests} />
