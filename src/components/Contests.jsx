@@ -124,8 +124,8 @@ class Contests extends Component {
             <div>
                 <Navbar />
                 {this.state.contests.reverse()}
-                <div>
-                    <br />
+                <div style={{marginTop:"14%"}}>
+
                     <div>
                         {this.state.contests.map((items, key) => (
                             <div key={key} className="ro">

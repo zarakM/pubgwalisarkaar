@@ -120,7 +120,7 @@ class MyProfile extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginTop:"14%"}}>
                 <Navbar />
                 <div className="container profile">
                 {console.log(this.state.profile.url)}

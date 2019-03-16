@@ -42,7 +42,7 @@ class Board extends Component {
     }
     render() {
         return (
-            <div>
+            <div style={{marginTop:"10%"}}>
                 <Navbar />
                 <div className="container">
                     <br />

@@ -3,6 +3,7 @@ import YouTube from 'react-youtube';
 import * as firebase from "firebase";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import "./css/videos.css"
 const getVideoId = require('get-video-id');
 
 
@@ -44,21 +45,22 @@ class Videos extends Component {
 
     render() {
         const opts = {
-            height: '400px',
-            width: '50%',
+            height: '300px',
+            width: '100%',
             playerVars: {
                 autoplay: 0
             }
         };
         return (
             <div>
-            <Navbar/>
-            <br/>
-                {this.state.link.map(items => (
-                    <YouTube videoId={items.link}
-                        opts={opts} />
-                ))}
-                <Footer/>
+                <Navbar />
+                <br />
+                <div className="videos">
+                    {this.state.link.map(items => (
+                        <YouTube videoId={items.link} opts={opts} />
+                    ))}
+                </div>
+                <Footer />
             </div>
         );
     }

@@ -6,6 +6,8 @@ import Board from "./components/Board"
 import Contests from "./components/Contests"
 import MyContests from "./components/MyContests"
 import Videos from "./components/Videos"
+import TopPlayers from "./components/TopPlayers"
+import SpecialEvents from "./components/SpecialEvent"
 
 import Policies from "./components/Policies"
 import DashboardAdmin from "./adminComponent/Dashboard"
@@ -33,7 +35,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div id="root">
         <BrowserRouter>
           <Switch>
             {/* admin route */}
@@ -55,6 +57,8 @@ class App extends Component {
             <Route exact path="/mycontests" component={MyContests} />
             <Route exact path="/contests" component={Contests} />
             <Route exact path="/videos" component={Videos} />
+            <Route exact path="/top_players" component={TopPlayers} />
+            <Route exact path="/events" component={SpecialEvents} />
             <Route exact path="/policies" component={Policies} />
           </Switch>
         </BrowserRouter >

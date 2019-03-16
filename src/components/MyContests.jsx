@@ -84,7 +84,7 @@ class MyContests extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginTop:"40%"}}>
                 <Navbar />
                 <div>
                     <br />

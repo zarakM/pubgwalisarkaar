@@ -26,7 +26,7 @@ class Policies extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div>
                 <Navbar />
                 <br />
                 <ul class="nav nav-tabs" id="myTab" role="tablist">

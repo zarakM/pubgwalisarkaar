@@ -88,14 +88,14 @@ class Navbar extends Component {
             clan: this.clan.value,
             pubg_id: this.pubg_id.value,
             number: this.number.value,
-            rating:0,
+            rating: 0,
             coins: 0
           }).then(() => {
             alert("Successfully registered and Logged in")
             com.setState({ openR: false, loggedIn: true })
           })
         }
-        else{
+        else {
 
         }
       })
@@ -194,36 +194,64 @@ class Navbar extends Component {
             </Dialog>
           </div>
         </div>
-        <div className="top-head">
-          <div >
-            <img className="logo" src={logo} width="220px" height="60px" />
-            <div classname="btn-top">
-              <button className="coins" onClick={this.buycoins}><FontAwesomeIcon icon={faMoneyBillAlt} /> {this.state.coins}</button>
-              <button className="logout" onClick={this.logout}>{this.state.loggedIn ? "LOGOUT" : "LOGIN"}</button>
+
+        <div className="top-head ">
+          <div className="container-1">
+            <div className="box-0">  <button className="coins" onClick={this.buycoins}><FontAwesomeIcon icon={faMoneyBillAlt} /> {this.state.coins}</button></div>
+            <div className="box-1"><img className="logo" src={logo} width="220px" height="60px" /></div>
+            <div className="box-2"> <button className="logout" onClick={this.logout}>{this.state.loggedIn ? "LOGOUT" : "LOGIN"}</button> </div>
+          </div>
+          <div>
+            <div className="navbar nav-web">
+              <Link to="/events" className="items">
+                <FontAwesomeIcon icon={faStarAndCrescent} /> SPECIAL EVENT
+              </Link>
+              <Link to="/contests" className="items">
+                <FontAwesomeIcon icon={faTrophy} /> BATTLE GROUNDS
+              </Link>
+              <Link to="/mycontests" className="items">
+                <FontAwesomeIcon icon={faCrosshairs} /> MY BATTLES
+              </Link>
+              <Link to="/top_players" className="items">
+                <FontAwesomeIcon icon={faMedal} /> TOP PLAYERS
+              </Link>
+              <Link to="/videos" className="items">
+                <FontAwesomeIcon icon={faVideo} /> VIDEOS
+                </Link>
+              <Link to="/profile" className="items">
+                <FontAwesomeIcon icon={faUserCircle} /> PROFILE
+                </Link>
             </div>
+
+            <div className="navbar nav-mobile " id="mob-nav">
+              <Link to="/events" className="items">
+                <FontAwesomeIcon icon={faStarAndCrescent} />
+              </Link>
+              <Link to="/contests" className="items">
+                <FontAwesomeIcon icon={faTrophy} />
+              </Link>
+              <Link to="/mycontests" className="items">
+                <FontAwesomeIcon icon={faCrosshairs} />
+              </Link>
+              <Link to="/top_players" className="items">
+                <FontAwesomeIcon icon={faMedal} />
+              </Link>
+              <Link to="/videos" className="items">
+                <FontAwesomeIcon icon={faVideo} />
+              </Link>
+              <Link to="/profile" className="items">
+                <FontAwesomeIcon icon={faUserCircle} />
+              </Link>
+            </div>
+
           </div>
 
         </div>
-        <div className="navbar nav-web">
-          <Link to="/videos" className="items"><FontAwesomeIcon icon={faStarAndCrescent} /> SPECIAL EVENT</Link >
-          <Link to="/contests" className="items"><FontAwesomeIcon icon={faTrophy} /> BATTLE GROUNDS</Link>
-          <Link to="/mycontests" className="items"><FontAwesomeIcon icon={faCrosshairs} /> MY BATTLES</Link>
-          <Link to="/videos" className="items"><FontAwesomeIcon icon={faMedal} /> TOP PLAYERS</Link >
-          <Link to="/videos" className="items"><FontAwesomeIcon icon={faVideo} /> VIDEOS</Link >
-          <Link to="/profile" className="items"><FontAwesomeIcon icon={faUserCircle} /> PROFILE</Link >
-        </div>
 
-        <div className="navbar nav-mobile ">
-          <Link to="/videos" className="items"><FontAwesomeIcon icon={faStarAndCrescent} /></Link >
-          <Link to="/contests" className="items"><FontAwesomeIcon icon={faTrophy} /></Link>
-          <Link to="/mycontests" className="items"><FontAwesomeIcon icon={faCrosshairs} /></Link>
-          <Link to="/videos" className="items"><FontAwesomeIcon icon={faMedal} /></Link >
-          <Link to="/videos" className="items"><FontAwesomeIcon icon={faVideo} /></Link >
-          <Link to="/profile" className="items"><FontAwesomeIcon icon={faUserCircle} /></Link >
-        </div>
       </div>
     );
   }
 }
 
 export default Navbar;
+

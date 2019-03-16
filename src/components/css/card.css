@@ -66,20 +66,22 @@ bt-join {
     border-radius: none;
 }
 
-body {
-    font-family: roboto;
-}
-
 .c-heading {
     color: teal;
 }
 
 body {
     background-color: #e9ebee;
+    margin-top: 8%;
+    font-family: roboto;
 }
 
-.ro {
+.ro{
     margin-left: 20%;
+}
+
+.box8 {
+    display: none;
 }
 
 @media(max-width:680px) {
@@ -90,8 +92,4 @@ body {
         width: 121%;
         margin-left: -23%;
     }
-}
-
-.box8 {
-    display: none;
 }

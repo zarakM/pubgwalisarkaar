@@ -21,7 +21,8 @@ class CreateLeaderboard extends Component {
     addUser = e => {
         e.preventDefault();
         let com = this
-        let ref = firebase.database().ref().child("leaderboard/" + this.state.contest_id).push()
+        let dbRef= firebase.database().ref()
+        let ref = dbRef.child("leaderboard/" + this.state.contest_id).push()
         let key = ref.key
         ref.set({
             user_name: this.user.value,
