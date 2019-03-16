@@ -44,7 +44,7 @@ class SimpleTabs extends React.Component {
     return (
       <div className="container abt-header">
         <AppBar position="static">
-          <Tabs value={value} onChange={this.handleChange}>
+          <Tabs value={value} onChange={this.handleChange} className="appbar1">
             <Tab label="About" />
             <Tab label="Prize" />
             <Tab label="Leader Board" />
