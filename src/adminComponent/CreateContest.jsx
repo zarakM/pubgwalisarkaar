@@ -35,7 +35,8 @@ class CreateContest extends Component {
                 per_kill: this.per_kill.value,
                 date: this.date.value,
                 time: this.time.value,
-                winner: this.winner.value
+                winner: this.winner.value,
+                players: 0
             })
             this.map.value = "";
             this.type.value = "";

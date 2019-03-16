@@ -5,7 +5,6 @@ import Footer from "./Footer"
 import Miramar from "./imgUtils/miramaar.png"
 import Erangel from "./imgUtils/erangel.jpg"
 import "./css/card.css"
-import Board from "./Board"
 
 
 class Contests extends Component {
@@ -57,6 +56,7 @@ class Contests extends Component {
                         map: childD.val().map,
                         per_kill: childD.val().per_kill,
                         winner: childD.val().winner,
+                        players: childD.val().players,
                         button
                     });
                 });
@@ -67,8 +67,9 @@ class Contests extends Component {
             });
     }
 
-    Join(entry, id, e) {
+    Join(entry, id, type, e) {
         e.preventDefault()
+        var type = type
         if (this.state.loggedIn === true) {
             let joined = false;
             firebase.database().ref().child("contest_players/" + this.state.user_id)
@@ -82,6 +83,21 @@ class Contests extends Component {
                     if (joined) { alert("you already joined this match") }
                     else {
                         let com = this
+                        firebase.database().ref().child("contests/" + id + "/players").once('value', snap => {
+                            let rating = snap.val()
+                            if (type === "Squad") {
+                                rating = rating + 1
+                            } else if (type === "Duo") {
+                                rating = rating + 2
+                            } else if (type === "Solo") {
+                                rating = rating + 4
+                            }
+                            let up = {}
+                            up["contests/" + id + "/players"] = rating
+                            firebase.database().ref().update(up).then(() => {
+
+                            })
+                        })
                         firebase.database().ref().child("profiles/" + com.state.user_id).once('value', snap => {
                             let before_coins = snap.val().coins;
                             if (entry > before_coins) {
@@ -97,6 +113,7 @@ class Contests extends Component {
                                         window.location.reload();
                                     }).catch(error => { alert(error) })
                                 } else {
+
                                 }
                             }
                         })
@@ -115,7 +132,6 @@ class Contests extends Component {
 
     board = (id, e) => {
         e.preventDefault()
-
         this.props.history.push("/board/" + id);
     }
 
@@ -124,8 +140,7 @@ class Contests extends Component {
             <div>
                 <Navbar />
                 {this.state.contests.reverse()}
-                <div style={{marginTop:"14%"}}>
-
+                <div style={{ marginTop: "14%" }}>
                     <div>
                         {this.state.contests.map((items, key) => (
                             <div key={key} className="ro">
@@ -135,13 +150,13 @@ class Contests extends Component {
                                         <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
                                         <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
                                         <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
-                                        <div className="box3"> <p className="c-heading">Players</p><p>{items.entry}</p></div>
+                                        <div className="box3"> <p className="c-heading">Players</p><p>{items.players}</p></div>
                                     </div>
                                     <div className="container-1">
                                         <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
                                         <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
                                         <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
-                                        <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Join.bind(this, items.entry, items.id)} className="btn btn-sm btn-outline-success">Join</button>
+                                        <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Join.bind(this, items.entry, items.id, items.type)} className="btn btn-sm btn-outline-success">Join</button>
                                             : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button>}
                                         </div>
                                     </div>

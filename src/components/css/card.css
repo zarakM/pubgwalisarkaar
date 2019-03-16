@@ -71,8 +71,8 @@ bt-join {
 }
 
 body {
+    padding-top: 80px;
     background-color: #e9ebee;
-    margin-top: 8%;
     font-family: roboto;
 }
 

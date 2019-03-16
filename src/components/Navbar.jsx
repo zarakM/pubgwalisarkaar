@@ -198,7 +198,7 @@ class Navbar extends Component {
         <div className="top-head ">
           <div className="container-1">
             <div className="box-0">  <button className="coins" onClick={this.buycoins}><FontAwesomeIcon icon={faMoneyBillAlt} /> {this.state.coins}</button></div>
-            <div className="box-1"><img className="logo" src={logo} width="220px" height="60px" /></div>
+            <div className="box-1"><img className="logo" src={logo} width="220px" height="60px" alt="images" /></div>
             <div className="box-2"> <button className="logout" onClick={this.logout}>{this.state.loggedIn ? "LOGOUT" : "LOGIN"}</button> </div>
           </div>
           <div>
