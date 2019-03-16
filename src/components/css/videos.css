@@ -1,7 +1,6 @@
 .videos{
     width:50%;
     margin-left: 25%;
-    margin-top: 10%
 }
 
 @media(max-width:570px ){ 
@@ -9,6 +8,5 @@
         width:90%;
         margin-left: 5%;
         margin-right: 5%;
-        margin-top: 20%
     }
 }

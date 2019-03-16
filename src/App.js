@@ -13,9 +13,12 @@ import Policies from "./components/Policies"
 import DashboardAdmin from "./adminComponent/Dashboard"
 
 import CreateContest from "./adminComponent/CreateContest";
+import CreateDetails from "./adminComponent/CreateDetails";
 import CreateVideos from "./adminComponent/CreateVideos";
 import CreateLeaderboard from "./adminComponent/CreateLeaderboard";
 
+
+import AboutContest from "./components/AboutContest"
 import GetVideos from "./adminComponent/GetVideos";
 import GetContest from "./adminComponent/GetContest";
 import GetLeaderboard from "./adminComponent/GetLeaderboard";
@@ -41,6 +44,7 @@ class App extends Component {
             {/* admin route */}
             <Route exact path="/admin" component={DashboardAdmin} />
             
+            <Route exact path="/create_details" component={CreateDetails} />
             <Route exact path="/create_contest" component={CreateContest} />
             <Route exact path="/create_videos" component={CreateVideos} />
             <Route exact path="/create_leaderboard" component={CreateLeaderboard} />
@@ -60,6 +64,8 @@ class App extends Component {
             <Route exact path="/top_players" component={TopPlayers} />
             <Route exact path="/events" component={SpecialEvents} />
             <Route exact path="/policies" component={Policies} />
+            <Route exact path="/aboutcontest/:id" component={AboutContest} />
+
           </Switch>
         </BrowserRouter >
       </div>

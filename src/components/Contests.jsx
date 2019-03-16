@@ -69,6 +69,7 @@ class Contests extends Component {
 
     Join(entry, id, type, e) {
         e.preventDefault()
+
         var type = type
         if (this.state.loggedIn === true) {
             let joined = false;
@@ -80,7 +81,7 @@ class Contests extends Component {
                         }
                     })
                 }).then(() => {
-                    if (joined) { alert("you already joined this match") }
+                    if (joined) { this.props.history.push("/aboutcontest/" + id); }
                     else {
                         let com = this
                         firebase.database().ref().child("contests/" + id + "/players").once('value', snap => {
@@ -132,7 +133,7 @@ class Contests extends Component {
 
     board = (id, e) => {
         e.preventDefault()
-        this.props.history.push("/board/" + id);
+        this.props.history.push("/aboutcontest/" + id);
     }
 
     render() {
@@ -140,7 +141,7 @@ class Contests extends Component {
             <div>
                 <Navbar />
                 {this.state.contests.reverse()}
-                <div style={{ marginTop: "14%" }}>
+                <div>
                     <div>
                         {this.state.contests.map((items, key) => (
                             <div key={key} className="ro">
@@ -157,7 +158,7 @@ class Contests extends Component {
                                         <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
                                         <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
                                         <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Join.bind(this, items.entry, items.id, items.type)} className="btn btn-sm btn-outline-success">Join</button>
-                                            : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>LeaderBoard</button>}
+                                            : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>Closed</button>}
                                         </div>
                                     </div>
                                 </div>

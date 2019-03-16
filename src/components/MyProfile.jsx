@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from "firebase";
 import Navbar from "./Navbar"
 import Footer from "./Footer"
-import avatar from './imgUtils/me.png';
+import Avatar from './imgUtils/avatar.png';
 import "./css/profile.css";
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -120,11 +120,11 @@ class MyProfile extends Component {
 
     render() {
         return (
-            <div style={{marginTop:"14%"}}>
+            <div>
                 <Navbar />
                 <div className="container profile">
-                {console.log(this.state.profile.url)}
-                    <img className="avatar" src={this.state.profile.url} alt="display pic" />
+                {this.state.profile.url === ""? <img className="avatar" src={Avatar} alt="display pic" />:
+                    <img className="avatar" src={this.state.profile.url} alt="display pic" />}
                     <div className="pro-field">
                         {this.state.edit ?
                             <div>

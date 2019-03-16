@@ -29,8 +29,10 @@ class Navbar extends Component {
     let com = this
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        firebase.database().ref().child("profiles/" + user.uid).once("value", snap => {
-          com.setState({ coins: snap.val().coins, loggedIn: true })
+        console.log(user.uid)
+        firebase.database().ref().child("profiles/" + user.uid+"/coins").once("value", snap => {
+          com.setState({ coins: snap.val(), loggedIn: true })
+          console.log(snap.val())
         })
       }
       else {
@@ -73,32 +75,37 @@ class Navbar extends Component {
     alert("please paytm money to +9769769")
   }
 
-  handleRegister = e => {
-    e.preventDefault();
+  handleRegister = es => {
+    es.preventDefault();
     let com = this
+    let e = true
     firebase.auth().createUserWithEmailAndPassword(this.email.value, this.passwords.value).catch(function (error) {
       var errorMessage = error.message;
+      e = false
       alert(errorMessage)
     }).then(() => {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          firebase.database().ref().child("profiles/" + user.uid).set({
-            email: this.email.value,
-            name: this.names.value,
-            clan: this.clan.value,
-            pubg_id: this.pubg_id.value,
-            number: this.number.value,
-            rating: 0,
-            coins: 0
-          }).then(() => {
-            alert("Successfully registered and Logged in")
-            com.setState({ openR: false, loggedIn: true })
-          })
-        }
-        else {
+      if (e) {
+        firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+            firebase.database().ref().child("profiles/" + user.uid).set({
+              email: this.email.value,
+              name: this.names.value,
+              clan: this.clan.value,
+              pubg_id: this.pubg_id.value,
+              number: this.number.value,
+              rating: 0,
+              coins: 200,
+              url: ""
+            }).then(() => {
+              alert("Successfully registered and Logged in")
+              com.setState({ openR: false, loggedIn: true })
+            })
+          }
+          else {
 
-        }
-      })
+          }
+        })
+      }
     })
   }
 
@@ -223,7 +230,7 @@ class Navbar extends Component {
                 </Link>
             </div>
 
-            <div className="navbar nav-mobile " id="mob-nav">
+            <div className="navbar nav-mobile" id="mob-nav">
               <Link to="/events" className="items">
                 <FontAwesomeIcon icon={faStarAndCrescent} />
               </Link>

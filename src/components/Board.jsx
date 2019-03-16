@@ -23,30 +23,30 @@ class Board extends Component {
         firebase
             .database()
             .ref()
-            .child("leaderboard/" + this.props.match.params.id)
+            .child("leaderboard/" + this.props.id)
             .once("value", snap => {
-                let items = [];
-                snap.forEach(childD => {
-                    items.push({
-                        user_name: childD.val().user_name,
-                        kills: childD.val().kills,
-                        prize: childD.val().prize,
-                        rank: childD.val().rank,
+                if (snap.exists()) {
+                    let items = [];
+                    snap.forEach(childD => {
+                        items.push({
+                            user_name: childD.val().user_name,
+                            kills: childD.val().kills,
+                            prize: childD.val().prize,
+                            rank: childD.val().rank,
+                        });
                     });
-                });
-                Array.prototype.push.apply(com.state.leaders, items);
-                com.setState({
-                    leaders: com.state.leaders
-                });
+                    Array.prototype.push.apply(com.state.leaders, items);
+                    com.setState({
+                        leaders: com.state.leaders
+                    });
+                }
             });
     }
     render() {
         return (
-            <div style={{marginTop:"10%"}}>
+            <div>
                 <Navbar />
                 <div className="container">
-                    <br />
-                    <h3> Contests</h3>
                     <br />
                     <table className="table">
                         <thead>
