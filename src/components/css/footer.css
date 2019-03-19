@@ -2,3 +2,28 @@
     display: flex;
     justify-content: center;
   }
+
+.footer-container{
+  margin-bottom: 0;
+  background-color:#424242;
+  text-align: center;
+  color: #fff;
+}
+.page-box{
+  display: flex;
+}
+
+.box-1{
+  
+  flex: 1;
+}
+.box-2{
+  flex: 1;
+}
+.box-3{
+  flex: 1;
+}
+
+.textColor{
+  color: #fff;
+}

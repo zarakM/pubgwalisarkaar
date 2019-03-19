@@ -13,8 +13,10 @@ class TopPlayer extends Component {
     }
     render() {
         return (
-            <div style={{marginTop:"14%"}}>
-                <Navbar />
+            <div>
+                <Navbar/>
+            <div className="container">
+                
                 <h1>Coming soon</h1>
                 {/* <div className="container">
                     <table className="table table-bordered table-dark">
@@ -36,7 +38,10 @@ class TopPlayer extends Component {
                         </tbody>
                     </table>
                 </div> */}
-                <Footer />
+                
+
+            </div>
+            <Footer />
             </div>
         );
     }

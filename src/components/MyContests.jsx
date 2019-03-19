@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as firebase from "firebase";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Board from "./Board"
 
 import Miramar from "./imgUtils/miramaar.png"
 import Erangel from "./imgUtils/erangel.jpg"
@@ -78,7 +77,7 @@ class MyContests extends Component {
     Details = (id, e) => {
         e.preventDefault()
         firebase.database().ref().child("details/"+id).once('value',snap=>{
-            alert("RoomId: "+ snap.val().id +" RoomPassword: "+snap.val().password)
+            alert("RoomId: "+ snap.val().room +" RoomPassword: "+snap.val().pass)
         })
     }
 

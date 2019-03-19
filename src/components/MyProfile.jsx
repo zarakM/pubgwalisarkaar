@@ -7,6 +7,7 @@ import "./css/profile.css";
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FileUploader from "react-firebase-file-uploader";
+import QrCode from "./imgUtils/qr.png"
 
 class MyProfile extends Component {
     constructor() {
@@ -16,7 +17,9 @@ class MyProfile extends Component {
             user_id: "null",
             edit: false,
             show: false,
-            progress: 100
+            progress: 100,
+            buy_coins: false,
+            avatar:true
         }
     }
 
@@ -37,6 +40,8 @@ class MyProfile extends Component {
                     com.setState({
                         profile: ({ url, email, name, clan, pubg_id, rating, number })
                     });
+                }).then(()=>{
+                    com.setState({ avatar:false })
                 });
             }
             else {
@@ -117,83 +122,104 @@ class MyProfile extends Component {
             });
     };
 
-
+    closeBuying = e =>{
+        e.preventDefault()
+        this.setState({ buy_coins: false })
+    }
+    
+    openBuying = e =>{
+        e.preventDefault()
+        this.setState({ buy_coins: true })
+    }
+    
     render() {
         return (
             <div>
                 <Navbar />
                 <div className="container profile">
-                {this.state.profile.url === ""? <img className="avatar" src={Avatar} alt="display pic" />:
-                    <img className="avatar" src={this.state.profile.url} alt="display pic" />}
-                    <div className="pro-field">
-                        {this.state.edit ?
-                            <div>
-                                <TextField
-                                    id="standard-with-placeholder"
-                                    label="NAME"
-                                    placeholder="Placeholder"
-                                    className={"textField pro-text"}
-                                    margin="normal"
-                                    defaultValue={this.state.profile.name}
-                                    inputRef={ec => (this.name = ec)}
-                                />
-                                <TextField
-                                    id="standard-helperText "
-                                    label="CLAN"
-                                    placeholder="Placeholder"
-                                    className={"textField pro-text"}
-                                    margin="normal"
-                                    defaultValue={this.state.profile.clan}
-                                    inputRef={ec => (this.clan = ec)}
-                                />
-                                <TextField
-                                    id="standard-with-placeholder"
-                                    label="PUBD ID"
-                                    placeholder="Placeholder"
-                                    className={"textField pro-text"}
-                                    margin="normal"
-                                    defaultValue={this.state.profile.pubg_id}
-                                    inputRef={ec => (this.pubg_id = ec)}
-                                />
-                                <TextField
-                                    id="standard-with-placeholder"
-                                    label="EASY PAISA NO"
-                                    inputRef={ec => (this.no = ec)}
-                                    placeholder="Placeholder"
-                                    className={"textField pro-text"}
-                                    margin="normal"
-                                    defaultValue={this.state.profile.number}
-                                />
-                                <FileUploader
-                                    accept="image/*"
-                                    name="avatar"
-                                    filename={this.state.user_id}
-                                    storageRef={firebase.storage().ref("images")}
-                                    onUploadStart={this.handleUploadStart}
-                                    onUploadError={this.handleUploadError}
-                                    onUploadSuccess={this.handleUploadSuccess}
-                                    onProgress={this.handleProgress}
-                                />
-                                {this.state.progress}
-                                <br />
-                                <br />
-                                {this.state.progress === 100 ?
-                                    <button className="btn btn-success" style={{ width: "100%" }} onClick={this.edit}> Update</button>
-                                    : null}
-                            </div> :
-                            <div>
-                                <div className="values"><div style={{ color: "black" }}>Name</div><div>{this.state.profile.name}</div></div> <br />
-                                <div className="values"><div style={{ color: "black" }}>Email</div><div>{this.state.profile.email}</div></div> <br />
-                                <div className="values"><div style={{ color: "black" }}>Pubg Id</div><div>{this.state.profile.pubg_id}</div></div> <br />
-                                <div className="values"><div style={{ color: "black" }}>Clan</div><div>{this.state.profile.clan}</div></div> <br />
-                                <div className="values"><div style={{ color: "black" }}>Number</div><div>{this.state.profile.number}</div></div> <br />
-                                <div className="values"><div style={{ color: "black" }}>Rating</div><div>{this.state.profile.rating}</div></div> <br />
-                                <button className="btn btn-success" style={{ width: "100%" }} onClick={this.edit_button}> Edit</button>
-                                <br /><br />
-                                {this.state.show ? <CircularProgress />
-                                    : null}
-                            </div>}
-                    </div>
+                    {this.state.buy_coins ?
+                        <div className="pro-field">
+                            <h2 className="qrhead"> QR Code </h2>
+                            <img src={QrCode} height="350px" width="300px" alt="jazz cash qr code" />
+                            <p className="mbl-usr"> Using a mobile? <a href="youtube.com"> click here</a> </p>
+                            <p className="mbl-usr1"> <span >Note:</span> coins will be added after an hour of purchase.</p>                        
+                            <button className="btn btn-info" onClick={this.closeBuying}> Go Back </button>
+                        </div>
+                        :
+                        <div>
+                            {this.state.avatar || this.state.profile.url === "" ? <img className="avatar" src={Avatar} alt="display pic" /> :
+                                <img className="avatar" src={this.state.profile.url} alt="display pic" />}
+                            <div className="pro-field">
+                                {this.state.edit ?
+                                    <div>
+                                        <TextField
+                                            id="standard-with-placeholder"
+                                            label="NAME"
+                                            placeholder="Placeholder"
+                                            className={"textField pro-text"}
+                                            margin="normal"
+                                            defaultValue={this.state.profile.name}
+                                            inputRef={ec => (this.name = ec)}
+                                        />
+                                        <TextField
+                                            id="standard-helperText "
+                                            label="CLAN"
+                                            placeholder="Placeholder"
+                                            className={"textField pro-text"}
+                                            margin="normal"
+                                            defaultValue={this.state.profile.clan}
+                                            inputRef={ec => (this.clan = ec)}
+                                        />
+                                        <TextField
+                                            id="standard-with-placeholder"
+                                            label="PUBD ID"
+                                            placeholder="Placeholder"
+                                            className={"textField pro-text"}
+                                            margin="normal"
+                                            defaultValue={this.state.profile.pubg_id}
+                                            inputRef={ec => (this.pubg_id = ec)}
+                                        />
+                                        <TextField
+                                            id="standard-with-placeholder"
+                                            label="EASY PAISA NO"
+                                            inputRef={ec => (this.no = ec)}
+                                            placeholder="Placeholder"
+                                            className={"textField pro-text"}
+                                            margin="normal"
+                                            defaultValue={this.state.profile.number}
+                                        />
+                                        <FileUploader
+                                            accept="image/*"
+                                            name="avatar"
+                                            filename={this.state.user_id}
+                                            storageRef={firebase.storage().ref("images")}
+                                            onUploadStart={this.handleUploadStart}
+                                            onUploadError={this.handleUploadError}
+                                            onUploadSuccess={this.handleUploadSuccess}
+                                            onProgress={this.handleProgress}
+                                        />
+                                        {this.state.progress}
+                                        <br />
+                                        <br />
+                                        {this.state.progress === 100 ?
+                                            <button className="btn btn-success" style={{ width: "100%" }} onClick={this.edit}> Update</button>
+                                            : null}
+                                    </div> :
+                                    <div>
+                                        {this.state.show ? <CircularProgress />: null}
+                                        <div className="values"><div style={{ color: "black" }}>Name</div><div>{this.state.profile.name}</div></div> <br />
+                                        <div className="values"><div style={{ color: "black" }}>Email</div><div>{this.state.profile.email}</div></div> <br />
+                                        <div className="values"><div style={{ color: "black" }}>Pubg Id</div><div>{this.state.profile.pubg_id}</div></div> <br />
+                                        <div className="values"><div style={{ color: "black" }}>Clan</div><div>{this.state.profile.clan}</div></div> <br />
+                                        <div className="values"><div style={{ color: "black" }}>Number</div><div>{this.state.profile.number}</div></div> <br />
+                                        <div className="values"><div style={{ color: "black" }}>Rating</div><div>{this.state.profile.rating}</div></div> <br />
+                                        <button className="btn btn-success" style={{ width: "45%" }} onClick={this.edit_button}> Edit</button>
+                                        <button className="btn btn-info" style={{ marginLeft:"5%", width: "45%" }} onClick={this.openBuying}> Buy coins</button>
+                                        <br /><br />
+                                    </div>}
+                            </div>
+                        </div>
+                    }
                 </div>
 
                 <Footer />

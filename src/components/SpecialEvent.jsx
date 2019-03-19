@@ -12,9 +12,9 @@ class SpecialEvent extends Component {
     }
     render() {
         return (
-            <div style={{ marginTop: "14%" }}>
+            <div>
                 <Navbar />
-                <h1>Coming soon</h1>
+                <div className="container"><h1>Coming soon</h1></div>
                 <Footer />
             </div>
         );

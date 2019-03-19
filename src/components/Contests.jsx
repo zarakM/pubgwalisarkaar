@@ -138,7 +138,7 @@ class Contests extends Component {
 
     render() {
         return (
-            <div>
+            <div>       
                 <Navbar />
                 {this.state.contests.reverse()}
                 <div>
