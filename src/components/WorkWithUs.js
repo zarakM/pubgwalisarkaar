@@ -12,12 +12,12 @@ class WorkWithUS extends Component {
             <React.Fragment>
                 <br />
                 <Navbar />
-                <div className="container epage" style={{ overflowY: "scroll", height: "60vh" }}>
+                <div className="container epage" style={{ minHeight: "350px" }}>
                     <div className="row" >
                         <h3 className="epage-heading"> Work With Us</h3>
                         <p className="epage">Do you want to change the way India plays?
                 
-                Drop us an email @ career@pubkhelo.com
+                Drop us an email @ pubgwalisarkaar@gmail.com
                 
 We are small but growing fast and want to change the e-sports landscape in Pakistan.</p>
                     </div>

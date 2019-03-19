@@ -10,7 +10,7 @@ class ContactUs extends Component {
             <React.Fragment>
                 <br />
                 <Navbar />
-                <div className="container epage">
+                <div className="container epage"  style={{ minHeight: "350px" }}>
                     <div className="row" >
                         <h3 className="epage-heading"> Contact Us</h3>
 
