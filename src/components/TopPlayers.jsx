@@ -15,7 +15,7 @@ class TopPlayer extends Component {
         return (
             <div>
                 <Navbar/>
-            <div className="container">
+            <div className="container" style={{ minHeight: "350px" }}>
                 
                 <h1>Coming soon</h1>
                 {/* <div className="container">

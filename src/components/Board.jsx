@@ -46,7 +46,7 @@ class Board extends Component {
         return (
             <div>
                 <Navbar />
-                <div className="container">
+                <div className="container"  style={{ minHeight: "350px" }}>
                     <br />
                     <table className="table">
                         <thead>

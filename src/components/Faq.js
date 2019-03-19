@@ -12,7 +12,7 @@ class Faq extends Component {
             <React.Fragment>
                 <br />
                 <Navbar />
-                <div className="container epage" style={{ overflowY: "scroll", height: "60vh" }}>
+                <div className="container epage" style={{ minHeight: "350px" }}>
                     <div className="row" >
                         <h3 className="epage-heading">FAQs</h3>
                         <p className="epage">

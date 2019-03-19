@@ -55,7 +55,7 @@ class Videos extends Component {
             <div>
                 <Navbar />
                 <br />
-                <div className="videos">
+                <div className="videos"  style={{ minHeight: "350px" }}>
                     {this.state.link.map(items => (
                         <YouTube videoId={items.link} opts={opts} />
                     ))}

@@ -12,7 +12,7 @@ class WorkWithUS extends Component {
             <React.Fragment>
                 <br />
                 <Navbar />
-                <div className="container epage" style={{ overflowY: "scroll", height: "60vh" }}>
+                <div className="container epage" style={{ minHeight: "350px" }}>
                     <div className="row" >
                         <h3 className="epage-heading"> Work With Us</h3>
                         <p className="epage">Do you want to change the way India plays?

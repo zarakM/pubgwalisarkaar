@@ -18,6 +18,7 @@ import ContactUs from "./components/ContactUs"
 import Faq from "./components/Faq"
 import TermOfUse from "./components/TermsofUse"
 import WorkWithUs from "./components/WorkWithUs"
+import PrivacyPolicy from "./components/PrivacyPolicy"
 import AboutContest from "./components/AboutContest"
 import GetVideos from "./adminComponent/GetVideos";
 import GetContest from "./adminComponent/GetContest";
@@ -52,6 +53,7 @@ class App extends Component {
             <Route exact path= "/faq" component ={Faq}/> 
             <Route exact path= "/workwithus" component ={WorkWithUs}/> 
             <Route exact path= "/termofuse" component ={TermOfUse}/> 
+            <Route exact path= "/privacy" component ={PrivacyPolicy}/> 
             <Route exact path="/" component={Contests} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/board/:id" component={Board} />

@@ -85,7 +85,7 @@ class MyContests extends Component {
         return (
             <div>
                 <Navbar />
-                <div>
+                <div style={{ minHeight: "350px" }}>
                     <br />
                     {this.state.mine.map((items, key) => (
                         <div key={key} className="ro">

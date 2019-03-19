@@ -14,7 +14,7 @@ class SpecialEvent extends Component {
         return (
             <div>
                 <Navbar />
-                <div className="container"><h1>Coming soon</h1></div>
+                <div className="container" style={{ minHeight: "350px" }}><h1>Coming soon</h1></div>
                 <Footer />
             </div>
         );

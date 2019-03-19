@@ -50,7 +50,7 @@ class AboutContest extends Component {
         return (
             <div>
                 <Navbar />
-                <div className="ro">
+                <div className="ro"  style={{ minHeight: "350px" }}>
                     <img className="images c-image" src={Erangel} alt="pubg img" width="150px" height="150px" style={{ float: "left" }} />
                     <div className="card">
                         <div className="container-0 ">

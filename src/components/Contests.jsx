@@ -138,34 +138,32 @@ class Contests extends Component {
 
     render() {
         return (
-            <div>       
+            <div>
                 <Navbar />
                 {this.state.contests.reverse()}
-                <div>
-                    <div>
-                        {this.state.contests.map((items, key) => (
-                            <div key={key} className="ro">
-                                <img className="images c-image" src={Erangel} alt="image" width="150px" height="150px" style={{ float: "left" }} />
-                                <div className="card">
-                                    <div className="container-0 ">
-                                        <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
-                                        <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
-                                        <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
-                                        <div className="box3"> <p className="c-heading">Players</p><p>{items.players}</p></div>
-                                    </div>
-                                    <div className="container-1">
-                                        <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
-                                        <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
-                                        <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
-                                        <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Join.bind(this, items.entry, items.id, items.type)} className="btn btn-sm btn-outline-success">Join</button>
-                                            : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>Closed</button>}
-                                        </div>
+                <div style={{ minHeight: "350px" }}>
+                    {this.state.contests.map((items, key) => (
+                        <div key={key} className="ro">
+                            <img className="images c-image" src={Erangel} alt="image" width="150px" height="150px" style={{ float: "left" }} />
+                            <div className="card">
+                                <div className="container-0 ">
+                                    <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
+                                    <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
+                                    <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
+                                    <div className="box3"> <p className="c-heading">Players</p><p>{items.players}</p></div>
+                                </div>
+                                <div className="container-1">
+                                    <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
+                                    <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
+                                    <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
+                                    <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Join.bind(this, items.entry, items.id, items.type)} className="btn btn-sm btn-outline-success">Join</button>
+                                        : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>Closed</button>}
                                     </div>
                                 </div>
                             </div>
-                        ))}
-                        <br />
-                    </div>
+                        </div>
+                    ))}
+                    <br />
                 </div>
                 <Footer />
             </div>

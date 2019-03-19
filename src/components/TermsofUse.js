@@ -12,7 +12,7 @@ class Terms extends Component {
             <React.Fragment>
                 <br />
                 <Navbar />
-                <div className="container epage" style={{ overflowY: "scroll", height: "60vh" }}>
+                <div className="container epage"  style={{ minHeight: "350px" }}>
                     <div className="row" >
                         <h3 className="epage-heading"> Terms Of Use</h3>
                         <p className="epage">
