@@ -221,7 +221,7 @@ class MyProfile extends Component {
                         </div>
                     }
                 </div>
-
+                <br/>
                 <Footer />
             </div>
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,withRouter } from 'react-router-dom';
 import * as firebase from "firebase";
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
@@ -30,7 +30,7 @@ class Navbar extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log(user.uid)
-        firebase.database().ref().child("profiles/" + user.uid+"/coins").once("value", snap => {
+        firebase.database().ref().child("profiles/" + user.uid + "/coins").once("value", snap => {
           com.setState({ coins: snap.val(), loggedIn: true })
           console.log(snap.val())
         })
@@ -72,7 +72,11 @@ class Navbar extends Component {
 
   buycoins = e => {
     e.preventDefault()
-    alert("please paytm money to +9769769")
+    if (window.location.href === "http://localhost:3000/profile") {
+      alert("On Profile page please click buy coins")
+    } else {
+      this.props.history.push("/profile")
+    }
   }
 
   handleRegister = es => {
@@ -183,7 +187,7 @@ class Navbar extends Component {
                   autoFocus
                   margin="dense"
                   inputRef={ec => (this.name = ec)}
-                  label="Name"
+                  label="Email"
                   type="name"
                   fullWidth />
                 <TextField
@@ -260,5 +264,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
-
+export default withRouter(Navbar);

@@ -5,6 +5,12 @@ import Footer from "./Footer"
 import Miramar from "./imgUtils/miramaar.png"
 import Erangel from "./imgUtils/erangel.jpg"
 import "./css/card.css"
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 class Contests extends Component {
@@ -15,6 +21,10 @@ class Contests extends Component {
             user_id: null,
             boardKey: null,
             loggedIn: false,
+            openSolo: false,
+            openSquad: false,
+            openDuo: false,
+            contest_id: null
         }
 
         let com = this
@@ -84,21 +94,6 @@ class Contests extends Component {
                     if (joined) { this.props.history.push("/aboutcontest/" + id); }
                     else {
                         let com = this
-                        firebase.database().ref().child("contests/" + id + "/players").once('value', snap => {
-                            let rating = snap.val()
-                            if (type === "Squad") {
-                                rating = rating + 1
-                            } else if (type === "Duo") {
-                                rating = rating + 2
-                            } else if (type === "Solo") {
-                                rating = rating + 4
-                            }
-                            let up = {}
-                            up["contests/" + id + "/players"] = rating
-                            firebase.database().ref().update(up).then(() => {
-
-                            })
-                        })
                         firebase.database().ref().child("profiles/" + com.state.user_id).once('value', snap => {
                             let before_coins = snap.val().coins;
                             if (entry > before_coins) {
@@ -110,8 +105,29 @@ class Contests extends Component {
                                     var up = {}
                                     up["/profiles/" + com.state.user_id + "/coins"] = after_coins
                                     firebase.database().ref().update(up).then(() => {
-                                        firebase.database().ref().child("contest_players/" + this.state.user_id).push().set({ id })
-                                        window.location.reload();
+                                        firebase.database().ref().child("contest_players/" + this.state.user_id).push().set({ id }).then(() => {
+                                            firebase.database().ref().child("contests/" + id + "/players").once('value', snap => {
+                                                let rating = snap.val()
+                                                if (type === "Squad") {
+                                                    rating = rating + 1
+                                                } else if (type === "Duo") {
+                                                    rating = rating + 2
+                                                } else if (type === "Solo") {
+                                                    rating = rating + 4
+                                                }
+                                                let up = {}
+                                                up["contests/" + id + "/players"] = rating
+                                                firebase.database().ref().update(up).then(() => {
+                                                    if (type === "Squad") {
+                                                        com.setState({ openSquad: true, contest_id: id })
+                                                    } else if (type === "Duo") {
+                                                        com.setState({ openDuo: true, contest_id: id })
+                                                    } else if (type === "Solo") {
+                                                        com.setState({ openSolo: true, contest_id: id })
+                                                    }
+                                                })
+                                            })
+                                        })
                                     }).catch(error => { alert(error) })
                                 } else {
 
@@ -136,9 +152,160 @@ class Contests extends Component {
         this.props.history.push("/aboutcontest/" + id);
     }
 
+    handleClose = e => {
+        this.setState({ openDuo: false, openSolo: false, openSquad: false })
+    }
+
+    handleRegisterSolo = e => {
+        e.preventDefault()
+        let com = this
+        let id = this.state.contest_id
+        if (id === null) {
+            alert("something went wrong")
+        }
+        else {
+            firebase.database().ref().child("players_check/" + id).push().set({
+                player_one: com.solo.value
+            }).then(() => {
+                com.solo.value = ""
+                com.setState({ openDuo: false, openSolo: false, openSquad: false })
+            })
+        }
+    }
+
+    handleRegisterDuo = e => {
+        e.preventDefault()
+        let com = this
+        let id = this.state.contest_id
+        if (id === null) {
+            alert("something went wrong")
+        }
+        else {
+            firebase.database().ref().child("players_check/" + id).push().set({
+                player_one: com.duoOne.value,
+                player_two: com.duoTwo.value
+            }).then(() => {
+                com.duoOne.value = ""
+                com.duoTwo.value = ""
+                com.setState({ openDuo: false, openSolo: false, openSquad: false })
+            })
+        }
+    }
+
+    handleRegisterSquad = e => {
+        e.preventDefault()
+        let com = this
+        let id = this.state.contest_id
+        if (id === null) {
+            alert("something went wrong")
+        }
+        else {
+            firebase.database().ref().child("players_check/" + id).push().set({
+                player_one: com.squadOne.value,
+                player_two: com.squadTwo.value,
+                player_three: com.squadThree.value,
+                player_four: com.squadFour.value
+            }).then(() => {
+                com.squadFour.value = ""
+                com.squadThree.value = ""
+                com.squadTwo.value = ""
+                com.squadOne.value = ""
+                com.setState({ openDuo: false, openSolo: false, openSquad: false })
+            })
+        }
+    }
+
     render() {
         return (
             <div>
+                <Dialog
+                    open={this.state.openSolo}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title">
+                    {/* Sign in */}
+                    <DialogTitle id="form-dialog-title">Register Your Team</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            inputRef={ec => (this.solo = ec)}
+                            label="Mobile number of player like 03152672725"
+                            type="number"
+                            fullWidth />
+                    </DialogContent>
+
+                    <DialogActions>
+                        <Button onClick={this.handleRegisterSolo} color="primary">Register</Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.openDuo}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title">
+                    {/* Sign in */}
+                    <DialogTitle id="form-dialog-title">Register Your Team</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            inputRef={ec => (this.duoOne = ec)}
+                            label="Mobile number of player like 03152672725"
+                            type="number"
+                            fullWidth />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            inputRef={ec => (this.duoTwo = ec)}
+                            label="Mobile number of player like 03152672725"
+                            type="number"
+                            fullWidth />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleRegisterDuo} color="primary">Register</Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.openSquad}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title">
+                    {/* Sign in */}
+                    <DialogTitle id="form-dialog-title">Register Your Team</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            inputRef={ec => (this.squadOne = ec)}
+                            label="Mobile number of player like 03152672725"
+                            type="number"
+                            fullWidth />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            inputRef={ec => (this.squadTwo = ec)}
+                            label="Mobile number of player like 03152672725"
+                            type="number"
+                            fullWidth />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            inputRef={ec => (this.squadThree = ec)}
+                            label="Mobile number of player like 03152672725"
+                            type="number"
+                            fullWidth />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            inputRef={ec => (this.squadFour = ec)}
+                            label="Mobile number of player like 03152672725"
+                            type="number"
+                            fullWidth />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleRegisterSquad} color="primary">Register</Button>
+                    </DialogActions>
+                </Dialog>
                 <Navbar />
                 {this.state.contests.reverse()}
                 <div style={{ minHeight: "350px" }}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./css/footer.css"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import fb from "./imgUtils/fb.png";
@@ -8,7 +8,6 @@ import ins from "./imgUtils/instagram.png";
 import yt from "./imgUtils/youtube.png";
 
 class Footer extends Component {
-
     render() {
         return (
             <div className="footer-container">
@@ -31,18 +30,18 @@ class Footer extends Component {
                     </div>
 
                 </div>
-                <br/>
+                <br />
                 <h4> Follow Us:</h4>
 
                 <div className="flex-container">
                     <br />
-                    <img src={fb} height="40px" style={{ margin: "10px" }} alt="youtube" />
-                    <img src={ins} height="40px" style={{ margin: "10px" }} alt="youtube" />
-                    <img src={yt} height="40px" style={{ margin: "10px" }} alt="youtube" />
+                    <a href="https://www.facebook.com/pubgwalisarkar1"><img src={fb} height="40px" style={{ margin: "10px" }} alt="youtube" /></a>
+                    <a href="https://www.instagram.com/pubgwalisarkar"><img src={ins} height="40px" style={{ margin: "10px" }} alt="youtube" /></a>
+                    <a href="https://www.youtube.com/channel/UChAx1ZyV4sULQb8OMD6yVmw"><img src={yt} height="40px" style={{ margin: "10px" }} alt="youtube" /></a>
                 </div>
 
             </div>
         )
     }
 }
-export default Footer;
+export default withRouter(Footer);  

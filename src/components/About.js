@@ -16,7 +16,7 @@ class About extends Component {
                 <div className="container epage"  style={{ minHeight: "350px" }}>
                     <div className="row" >
                         <h3 className="epage-heading"> About Us</h3>
-                        <p className="epage">We aim to be India’s biggest e-sports gaming platform with PUBG, CS GO and FIFA games. If you think you have what it takes, then this is the place for you. It is a game of skill that offers gamers a platform to showcase their talent and make a career as a professional gamer.
+                        <p className="epage">We aim to be Pakistan's biggest e-sports gaming platform with PUBG. If you think you have what it takes, then this is the place for you. It is a game of skill that offers gamers a platform to showcase their talent and make a career as a professional gamer.
     
                 We help hardcore gamers as well as novice players increase their engagement and connect deeper with their favorite e-sport.
     
