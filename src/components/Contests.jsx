@@ -79,7 +79,7 @@ class Contests extends Component {
 
     Join(entry, id, type, e) {
         e.preventDefault()
-
+        console.log(entry)
         var type = type
         if (this.state.loggedIn === true) {
             let joined = false;
@@ -316,7 +316,7 @@ class Contests extends Component {
                                 <div className="container-0 ">
                                     <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
                                     <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
-                                    <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
+                                    <div className="box2"> <p className="c-heading" >Entry</p><p key={items.id}>{items.entry}</p></div>
                                     <div className="box3"> <p className="c-heading">Players</p><p>{items.players}</p></div>
                                 </div>
                                 <div className="container-1">

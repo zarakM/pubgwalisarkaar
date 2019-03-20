@@ -56,6 +56,7 @@ class MyContests extends Component {
                                 map: snaps.val().map,
                                 per_kill: snaps.val().per_kill,
                                 winner: childD.val().winner,
+                                players: childD.val().players,
                                 button
                             });
                             Array.prototype.push.apply(com.state.mine, items);
@@ -76,8 +77,8 @@ class MyContests extends Component {
 
     Details = (id, e) => {
         e.preventDefault()
-        firebase.database().ref().child("details/"+id).once('value',snap=>{
-            alert("RoomId: "+ snap.val().room +" RoomPassword: "+snap.val().pass)
+        firebase.database().ref().child("details/" + id).once('value', snap => {
+            alert("RoomId: " + snap.val().room + " RoomPassword: " + snap.val().pass)
         })
     }
 
@@ -95,7 +96,7 @@ class MyContests extends Component {
                                     <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
                                     <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
                                     <div className="box2"> <p className="c-heading" >Entry</p><p>{items.entry}</p></div>
-                                    <div className="box3"> <p className="c-heading">Players</p><p>{items.entry}</p></div>
+                                    <div className="box3"> <p className="c-heading">Players</p><p>{items.players}</p></div>
                                 </div>
                                 <div className="container-1">
                                     <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>

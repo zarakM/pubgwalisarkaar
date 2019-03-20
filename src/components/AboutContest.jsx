@@ -50,7 +50,7 @@ class AboutContest extends Component {
         return (
             <div>
                 <Navbar />
-                <div className="ro"  style={{ minHeight: "350px" }}>
+                <div className="ro">
                     <img className="images c-image" src={Erangel} alt="pubg img" width="150px" height="150px" style={{ float: "left" }} />
                     <div className="card">
                         <div className="container-0 ">
@@ -67,7 +67,7 @@ class AboutContest extends Component {
                         </div>
                     </div>
                 </div>
-                <br />
+                <br/>
                 <SimpleTabs id={this.state.contest_id} />
                 <Footer />
             </div>
