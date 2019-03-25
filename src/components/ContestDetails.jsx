@@ -36,17 +36,17 @@ class SimpleTabs extends React.Component {
         this.state = {
             value: 0,
             contest_id: this.props.id,
-            room_no:0,
-            password:""
+            room_no: 0,
+            password: ""
         }
 
         let com = this
-        firebase.database().ref().child("details/"+this.props.id).once('value',snap=>{
-            if(snap.exists()){
-                com.setState({ room_no:snap.val().room, password:snap.val().pass })
+        firebase.database().ref().child("details/" + this.props.id).once('value', snap => {
+            if (snap.exists()) {
+                com.setState({ room_no: snap.val().room, password: snap.val().pass })
             }
-            else{
-                com.setState({ room_no:"Please come later or before 15 mins of match timing"})
+            else {
+                com.setState({ room_no: "Please come later or before 15 mins of match timing" })
             }
         })
     }
@@ -121,7 +121,22 @@ class SimpleTabs extends React.Component {
                     </table>
                 </TabContainer>}
                 {value === 2 && <TabContainer><Board contest_id={this.state.contest_id} /></TabContainer>}
-                {value === 3 && <TabContainer>{this.state.room_no}<br/>{this.state.password}</TabContainer>}
+                {value === 3 && <TabContainer>
+                    <table class="table">
+                        <thead>
+                            <tr>
+      <th scope="col">Room</th>
+                                <th scope="col">Password</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{this.state.room_no}</td>
+                                <td>{this.state.password}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br /></TabContainer>}
             </div>
         );
     }

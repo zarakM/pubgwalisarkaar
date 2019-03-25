@@ -42,9 +42,11 @@ class Contests extends Component {
     componentDidMount() {
         let com = this
         let joined_contests = []
-        let ref = firebase.database().ref()
+        
         firebase.auth().onAuthStateChanged(user => {
+            let ref = firebase.database().ref()
             if (user) {
+                com.setState({ contests: [] })
                 ref.child("contest_players/" + user.uid)
                     .once("value", snaps => {
                         snaps.forEach(child => {

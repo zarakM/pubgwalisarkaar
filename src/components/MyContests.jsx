@@ -65,7 +65,7 @@ class MyContests extends Component {
 
     Leaderboard = (id, e) => {
         e.preventDefault()
-        this.props.history.push("/board/" + id);
+        this.props.history.push("/aboutcontest/" + id);
     }
 
     render() {
