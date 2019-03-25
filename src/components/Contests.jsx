@@ -90,6 +90,39 @@ class Contests extends Component {
                             })
                     })
             }
+            else {
+                com.setState({ contests: [] })
+                ref.child("contests")
+                    .once("value", snap => {
+                        let items = [];
+                        snap.forEach(childD => {
+                            var datum = new Date(childD.val().date + " " + childD.val().time + ":00");
+                            let timestamp = datum.getTime();
+                            let date = new Date();
+                            let now = date.getTime()
+                            let button
+                            if (timestamp < now) {
+                                button = false
+                            } else {
+                                button = true
+                            }
+                            items.push({
+                                id: childD.key,
+                                date: childD.val().date,
+                                time: childD.val().time,
+                                type: childD.val().type,
+                                entry: childD.val().entry,
+                                map: childD.val().map,
+                                per_kill: childD.val().per_kill,
+                                winner: childD.val().winner,
+                                players: childD.val().players,
+                                button: button
+                            });
+                        });
+                        Array.prototype.push.apply(com.state.contests, items);
+                        com.setState({ contests: com.state.contests })
+                    })
+            }
         })
 
     }
@@ -141,12 +174,7 @@ class Contests extends Component {
             })
         }
         else {
-            if (this.state.loggedIn === true) {
-                alert("please logged in first")
-            }
-            else {
-                alert("please logged in first")
-            }
+            alert("please logged in first")
         }
     }
 

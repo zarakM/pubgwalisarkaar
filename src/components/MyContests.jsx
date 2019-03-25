@@ -26,60 +26,46 @@ class MyContests extends Component {
 
     componentDidMount() {
         let com = this
-        setTimeout(() =>
-            firebase
-                .database()
-                .ref()
-                .child("contest_players/" + com.state.user_id)
-                .once("value", snap => {
-                    snap.forEach(childD => {
-                        let items = []
-                        let contest_id = childD.val().id
-                        firebase.database().ref().child("contests/" + contest_id).once("value", snaps => {
-                            let button;
-                            var datum = new Date(snaps.val().date + " " + snaps.val().time + ":00");
-                            let timestamp = datum.getTime();
-                            let date = new Date();
-                            let now = date.getTime();
-                            console.log(timestamp + " - " + now)
-                            if (timestamp > now) {
-                                button = true
-                            } else {
-                                button = false
-                            }
-                            items.push({
-                                id: snaps.key,
-                                date: snaps.val().date,
-                                time: snaps.val().time,
-                                type: snaps.val().type,
-                                entry: snaps.val().entry,
-                                map: snaps.val().map,
-                                per_kill: snaps.val().per_kill,
-                                winner: childD.val().winner,
-                                players: childD.val().players,
-                                button
-                            });
-                            Array.prototype.push.apply(com.state.mine, items);
-                            com.setState({
-                                mine: com.state.mine
-                            });
-                        })
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                firebase
+                    .database()
+                    .ref()
+                    .child("contest_players/" + user.uid)
+                    .once("value", snap => {
+                        snap.forEach(childD => {
+                            let items = []
+                            let contest_id = childD.val().id
+                            firebase.database().ref().child("contests/" + contest_id).once("value", snaps => {
+                                items.push({
+                                    id: snaps.key,
+                                    date: snaps.val().date,
+                                    time: snaps.val().time,
+                                    type: snaps.val().type,
+                                    entry: snaps.val().entry,
+                                    map: snaps.val().map,
+                                    per_kill: snaps.val().per_kill,
+                                    winner: snaps.val().winner,
+                                    players: snaps.val().players,
+                                });
+                                Array.prototype.push.apply(com.state.mine, items);
+                                com.setState({
+                                    mine: com.state.mine
+                                });
+                            })
 
-                    });
-                })
-            , 5000)
+                        });
+                    })
+            }
+            else {
+                com.setState({ mine: [] })
+            }
+        })
     }
 
     Leaderboard = (id, e) => {
         e.preventDefault()
         this.props.history.push("/board/" + id);
-    }
-
-    Details = (id, e) => {
-        e.preventDefault()
-        firebase.database().ref().child("details/" + id).once('value', snap => {
-            alert("RoomId: " + snap.val().room + " RoomPassword: " + snap.val().pass)
-        })
     }
 
     render() {
@@ -102,9 +88,9 @@ class MyContests extends Component {
                                     <div className="box4"> <p style={{ color: "orange" }}>Erangel</p></div>
                                     <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
                                     <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
-                                    <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Details.bind(this, items.id)} className="btn btn-sm btn-outline-success">Details</button>
-                                        : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.Leaderboard.bind(this, items.id)}>LeaderBoard</button>}
-                                    </div>                                </div>
+                                    <div className="box7" key={items.id}> <button className="btn btn-sm btn-outline-info" key={items.id} onClick={this.Leaderboard.bind(this, items.id)}>Details</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}

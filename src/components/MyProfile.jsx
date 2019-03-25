@@ -46,6 +46,7 @@ class MyProfile extends Component {
             }
             else {
                 com.setState({ user_id: null })
+                alert("please login first")
                 this.props.history.push("/")
             }
         })
