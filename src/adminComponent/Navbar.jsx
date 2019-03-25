@@ -17,9 +17,6 @@ class Navbar extends Component {
       open: false,
       loggedIn: false
     }
-  }
-
-  componentDidMount() {
     let com = this
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -36,6 +33,9 @@ class Navbar extends Component {
         com.props.history.push("/admin")
       }
     })
+  }
+
+  componentDidMount() {
   }
 
   logout = e => {

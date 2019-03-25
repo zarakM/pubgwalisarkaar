@@ -48,12 +48,14 @@ class App extends Component {
             <Route exact path="/get_contest" component={GetContest} />
             <Route exact path="/get_leaderboard" component={GetLeaderboard} />
             <Route exact path="/get_videos" component={GetVideos} />
+
             <Route exact path= "/about_us" component ={About}/> 
             <Route exact path= "/contact_us" component ={ContactUs}/> 
             <Route exact path= "/faq" component ={Faq}/> 
             <Route exact path= "/workwithus" component ={WorkWithUs}/> 
             <Route exact path= "/termofuse" component ={TermOfUse}/> 
             <Route exact path= "/privacy" component ={PrivacyPolicy}/> 
+            
             <Route exact path="/" component={Contests} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/board/:id" component={Board} />
@@ -64,6 +66,7 @@ class App extends Component {
             <Route exact path="/events" component={SpecialEvents} />
             <Route exact path="/policies" component={Policies} />
             <Route exact path="/aboutcontest/:id" component={AboutContest} />
+          
           </Switch>
         </BrowserRouter >
       </div>

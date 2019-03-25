@@ -1,5 +1,5 @@
 .card {
-    border: 1px solid thistle;
+    border: 1px solid #888888;
     width: 60%;
     padding: 20px;
     margin-top: 20px;
@@ -101,4 +101,9 @@ body {
         margin-right: auto;
         display:block;
     }
+}
+.mbl-usr1{
+    color:grey;
+    font-size: 0.8em;
+    text-align: center
 }

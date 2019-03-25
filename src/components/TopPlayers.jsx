@@ -17,7 +17,7 @@ class TopPlayer extends Component {
                 <Navbar/>
             <div className="container" style={{ minHeight: "350px" }}>
                 
-                <h1>Coming soon</h1>
+                <h1>No player ranked yet</h1>
                 {/* <div className="container">
                     <table className="table table-bordered table-dark">
                         <thead>

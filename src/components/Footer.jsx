@@ -39,7 +39,8 @@ class Footer extends Component {
                     <a href="https://www.instagram.com/pubgwalisarkar"><img src={ins} height="40px" style={{ margin: "10px" }} alt="youtube" /></a>
                     <a href="https://www.youtube.com/channel/UChAx1ZyV4sULQb8OMD6yVmw"><img src={yt} height="40px" style={{ margin: "10px" }} alt="youtube" /></a>
                 </div>
-
+                <p><strong> For any queries: </strong>pubgwalisarkaar@gmail.com</p>
+                <div className="copy">COPYRIGHT@ PUBGWaliSarkar</div>
             </div>
         )
     }
