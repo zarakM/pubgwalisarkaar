@@ -366,7 +366,8 @@ class Contests extends Component {
                 <Navbar />
 
                 <p className="mbl-usr1 container"> <span >Steps to join contest:</span> 1.Click on join   2.Wait for confirmation   3.Enter your squad duo solo numbers ***Yay Joined*** </p>
-
+                <p className="mbl-usr1 container"> <span >Note:</span> If contest is paid cash prize will be send to numbers given upon joining contest </p>
+                {this.state.contests.reverse()}
                 <div style={{ minHeight: "350px" }}>
                     {this.state.contests.map((items, key) => (
                         <div key={key} className="ro">

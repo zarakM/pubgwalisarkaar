@@ -21,7 +21,7 @@ class CreateLeaderboard extends Component {
     addUser = e => {
         e.preventDefault();
         let com = this
-        let dbRef= firebase.database().ref()
+        let dbRef = firebase.database().ref()
         let ref = dbRef.child("leaderboard/" + this.state.contest_id).push()
         let key = ref.key
         ref.set({
@@ -29,39 +29,45 @@ class CreateLeaderboard extends Component {
             kills: this.kills.value,
             rank: this.rank.value,
             prize: this.prize.value
-        }).then(() => {
-            alert("Updated")
-            com.state.data.push({
-                row_key: key,
-                user: com.user.value,
-                kills: com.kills.value,
-                rank: com.rank.value,
-                prize: com.prize.value
-            })
-            com.user.value = ""
-            com.kills.value = ""
-            com.rank.value = ""
-            com.prize.value = ""
-            com.setState({ data: com.state.data })
-        }).catch(error => {
-            alert("Error occured check your internet or refresh your page" + error)
+        }, error => {
+            if (error) {
+                alert("Error occured check your internet or refresh your page" + error)
+            }
+            else {
+                alert("Updated")
+                com.state.data.push({
+                    row_key: key,
+                    user: com.user.value,
+                    kills: com.kills.value,
+                    rank: com.rank.value,
+                    prize: com.prize.value
+                })
+                com.user.value = ""
+                com.kills.value = ""
+                com.rank.value = ""
+                com.prize.value = ""
+                com.setState({ data: com.state.data })
+            }
         })
     }
 
-    handleDelete = (id,e)=>{
+    handleDelete = (id, e) => {
         e.preventDefault()
         let com = this
         firebase.database().ref().child("leaderboard/" + this.state.contest_id).child(id)
-        .remove().then(()=>{
-            com.state.data.forEach((snap,i)=>{
-                if(snap.row_key === id){
-                    com.state.data.splice(i,1)
+            .remove(error => {
+                if (error) {
+                    alert("error occured " + error);
+                }
+                else {
+                    com.state.data.forEach((snap, i) => {
+                        if (snap.row_key === id) {
+                            com.state.data.splice(i, 1)
+                        }
+                    })
+                    com.setState({ data: com.state.data })
                 }
             })
-            com.setState({data:com.state.data})
-        }).catch(error=>{
-            alert("error occured "+error);
-        })
     }
 
     render() {
@@ -147,36 +153,36 @@ class CreateLeaderboard extends Component {
                         </form>
 
                         <br />
-                <h3>Contests Members</h3>
-                <br />
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Username</th>
-                            <th scope="col">Kills</th>
-                            <th scope="col">Rank</th>
-                            <th scope="col">Prize</th>
-                            <th scope="col">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.data.map((value, key) => (
-                            <tr key={key}>
-                                <td>{value.user}</td>
-                                <td>{value.kills}</td>
-                                <td>{value.rank}</td>
-                                <td>{value.prize}</td>
-                                <td>
-                                    <button
-                                        className="btn btn-danger"
-                                        onClick={this.handleDelete.bind(this, value.row_key)}>
-                                        Delete
+                        <h3>Contests Members</h3>
+                        <br />
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Kills</th>
+                                    <th scope="col">Rank</th>
+                                    <th scope="col">Prize</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.data.map((value, key) => (
+                                    <tr key={key}>
+                                        <td>{value.user}</td>
+                                        <td>{value.kills}</td>
+                                        <td>{value.rank}</td>
+                                        <td>{value.prize}</td>
+                                        <td>
+                                            <button
+                                                className="btn btn-danger"
+                                                onClick={this.handleDelete.bind(this, value.row_key)}>
+                                                Delete
                                         </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
 
                     </div> :
                     <form onSubmit={this.addBoard}>
