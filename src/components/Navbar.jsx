@@ -30,8 +30,8 @@ class Navbar extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log(user.uid)
-        firebase.database().ref().child("profiles/" + user.uid+"/coins").once("value", snap => {
-          com.setState({ coins: snap.val(), loggedIn: true })
+        firebase.database().ref().child("profiles/" + user.uid + "/coins").once("value", snap => {
+          com.setState({ coins: snap.val(), loggedIn: true,open:false,openR:false })
           console.log(snap.val())
         })
       }
@@ -62,11 +62,14 @@ class Navbar extends Component {
 
   handleLogin = e => {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(this.name.value, this.password.value).then(() => {
-      this.setState({ open: false, loggedIn: true });
-    }).catch(function (error) {
-      var errorMessage = error.message;
-      alert(errorMessage)
+    var email = this.name.value
+    email = email.replace(/\s/g, '');
+    console.log(email)
+    firebase.auth().signInWithEmailAndPassword(email, this.password.value).catch(error => {
+      if (error) {
+        var errorMessage = error.message;
+        alert(errorMessage)
+      } 
     })
   }
 
@@ -102,7 +105,6 @@ class Navbar extends Component {
             })
           }
           else {
-
           }
         })
       }
@@ -149,7 +151,7 @@ class Navbar extends Component {
                 <TextField
                   margin="dense"
                   inputRef={ec => (this.pubg_id = ec)}
-                  label="PUBG ID"
+                  label="your name on pubg"
                   type="name"
                   fullWidth />
                 <TextField
