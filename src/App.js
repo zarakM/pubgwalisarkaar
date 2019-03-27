@@ -22,16 +22,22 @@ import AboutContest from "./components/AboutContest"
 import GetVideos from "./adminComponent/GetVideos";
 import GetContest from "./adminComponent/GetContest";
 import GetLeaderboard from "./adminComponent/GetLeaderboard";
+import ReactGA from 'react-ga';
 import {
   BrowserRouter,
   Switch,
   Route
 } from 'react-router-dom';
-class App extends Component { 
-  constructor(props){
+class App extends Component {
+  constructor(props) {
     super(props)
-    this.state={
+    this.state = {
     }
+  }
+
+  initializeReactGA() {
+    ReactGA.initialize('UA-137031900-1');
+    ReactGA.pageview('/homepage');
   }
   render() {
     return (
@@ -47,11 +53,11 @@ class App extends Component {
             <Route exact path="/get_contest" component={GetContest} />
             <Route exact path="/get_leaderboard" component={GetLeaderboard} />
             <Route exact path="/get_videos" component={GetVideos} />
-            <Route exact path= "/about_us" component ={About}/> 
-            <Route exact path= "/contact_us" component ={ContactUs}/> 
-            <Route exact path= "/faq" component ={Faq}/> 
-            <Route exact path= "/workwithus" component ={WorkWithUs}/> 
-            <Route exact path= "/termofuse" component ={TermOfUse}/> 
+            <Route exact path="/about_us" component={About} />
+            <Route exact path="/contact_us" component={ContactUs} />
+            <Route exact path="/faq" component={Faq} />
+            <Route exact path="/workwithus" component={WorkWithUs} />
+            <Route exact path="/termofuse" component={TermOfUse} />
             <Route exact path="/" component={Contests} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/board/:id" component={Board} />
