@@ -31,10 +31,6 @@ class CreateLeaderboard extends Component {
             prize: this.prize.value
         }, error => {
             if (error) {
-                alert("Error occured check your internet or refresh your page" + error)
-            }
-            else {
-                alert("Updated")
                 com.state.data.push({
                     row_key: key,
                     user: com.user.value,
@@ -47,6 +43,8 @@ class CreateLeaderboard extends Component {
                 com.rank.value = ""
                 com.prize.value = ""
                 com.setState({ data: com.state.data })
+            } else {
+                alert("Error occured check your internet or refresh your page" + error)
             }
         })
     }
@@ -55,18 +53,15 @@ class CreateLeaderboard extends Component {
         e.preventDefault()
         let com = this
         firebase.database().ref().child("leaderboard/" + this.state.contest_id).child(id)
-            .remove(error => {
-                if (error) {
-                    alert("error occured " + error);
-                }
-                else {
-                    com.state.data.forEach((snap, i) => {
-                        if (snap.row_key === id) {
-                            com.state.data.splice(i, 1)
-                        }
-                    })
-                    com.setState({ data: com.state.data })
-                }
+            .remove().then(() => {
+                com.state.data.forEach((snap, i) => {
+                    if (snap.row_key === id) {
+                        com.state.data.splice(i, 1)
+                    }
+                })
+                com.setState({ data: com.state.data })
+            }).catch(error => {
+                alert("error occured " + error);
             })
     }
 

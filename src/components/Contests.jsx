@@ -190,21 +190,21 @@ class Contests extends Component {
     }
 
     handleRegisterSolo = e => {
-        // e.preventDefault()
-        // let com = this
-        // let id = this.state.contest_id
-        // if (id === null) {
-        //     alert("something went wrong")
-        // }
-        // else {
-        //     firebase.database().ref().child("players_check/" + id).push().set({
-        //         player_one: com.solo.value
-        //     }).then(() => {
-        //         com.solo.value = ""
-        //         com.setState({ openDuo: false, openSolo: false, openSquad: false })
-        //         this.props.history.push("/aboutcontest/" + id);
-        //     })
-        // }
+        e.preventDefault()
+        let com = this
+        let id = this.state.contest_id
+        if (id === null) {
+            alert("something went wrong")
+        }
+        else {
+            firebase.database().ref().child("players_check/" + id).push().set({
+                player_one: com.solo.value
+            }).then(() => {
+                com.solo.value = ""
+                com.setState({ openDuo: false, openSolo: false, openSquad: false })
+                this.props.history.push("/aboutcontest/" + id);
+            })
+        }
     }
 
     handleRegisterDuo = e => {

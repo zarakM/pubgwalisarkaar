@@ -23,6 +23,7 @@ import AboutContest from "./components/AboutContest"
 import GetVideos from "./adminComponent/GetVideos";
 import GetContest from "./adminComponent/GetContest";
 import GetLeaderboard from "./adminComponent/GetLeaderboard";
+import ReactGA from 'react-ga';
 import {
   BrowserRouter,
   Switch,
@@ -34,6 +35,12 @@ class App extends Component {
     this.state={
     }
   }
+
+  initializeReactGA=()=> {
+    ReactGA.initialize('UA-137031900-1');
+    ReactGA.pageview('/');
+  }
+
   render() {
     return (
       <div id="root">
