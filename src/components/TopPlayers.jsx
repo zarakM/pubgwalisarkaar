@@ -11,14 +11,25 @@ class TopPlayer extends Component {
 
         }
     }
+
+    componentDidMount(){
+        // firebase.database().ref().child("profiles").once('value',snap=>{
+        //     snap.forEach(child=>{
+        //         let up={}
+        //         up["profiles/"+child.key+"/update"]=false
+        //         console.log("profiles/"+child.key+"/update")
+        //         firebase.database().ref().update(up)
+        //     })
+        // })
+    }
     render() {
         return (
             <div>
-                <Navbar/>
-            <div className="container" style={{ minHeight: "350px" }}>
-                
-                <h1>No player ranked yet</h1>
-                {/* <div className="container">
+                <Navbar />
+                <div className="container" style={{ minHeight: "350px" }}>
+
+                    <h1>No player ranked yet</h1>
+                    {/* <div className="container">
                     <table className="table table-bordered table-dark">
                         <thead>
                             <tr>
@@ -38,10 +49,10 @@ class TopPlayer extends Component {
                         </tbody>
                     </table>
                 </div> */}
-                
 
-            </div>
-            <Footer />
+
+                </div>
+                <Footer />
             </div>
         );
     }

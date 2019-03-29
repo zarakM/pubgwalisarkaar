@@ -36,8 +36,12 @@ class App extends Component {
     }
   }
 
-  initializeReactGA=()=> {
+  componentDidMount(){
     ReactGA.initialize('UA-137031900-1');
+    ReactGA.pageview('/admin');
+    ReactGA.pageview('/contests');
+    ReactGA.pageview('/mycontests');
+    ReactGA.pageview('/videos');
     ReactGA.pageview('/');
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link,withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import * as firebase from "firebase";
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle';
@@ -31,7 +31,7 @@ class Navbar extends Component {
       if (user) {
         console.log(user.uid)
         firebase.database().ref().child("profiles/" + user.uid + "/coins").once("value", snap => {
-          com.setState({ coins: snap.val(), loggedIn: true,open:false,openR:false  })
+          com.setState({ coins: snap.val(), loggedIn: true, open: false, openR: false })
           console.log(snap.val())
         })
       }
@@ -69,7 +69,7 @@ class Navbar extends Component {
       if (error) {
         var errorMessage = error.message;
         alert(errorMessage)
-      } 
+      }
     })
   }
 
@@ -101,7 +101,7 @@ class Navbar extends Component {
               pubg_id: this.pubg_id.value,
               number: this.number.value,
               rating: 0,
-              coins: 200,
+              coins: 0,
               url: ""
             }).then(() => {
               alert("Successfully registered and Logged in")

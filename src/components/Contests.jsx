@@ -38,7 +38,7 @@ class Contests extends Component {
             }
         })
     }
-    // this.props.history.push("/aboutcontest/" + id);
+
     componentDidMount() {
         let com = this
         let joined_contests = []
@@ -180,9 +180,9 @@ class Contests extends Component {
         }
     }
 
-    board = (id, e) => {
+    board = e => {
         e.preventDefault()
-        this.props.history.push("/aboutcontest/" + id);
+        alert("You have already joined or it has been closed \n Please visit my contest tab for details of contests")
     }
 
     handleClose = e => {
@@ -376,7 +376,7 @@ class Contests extends Component {
                                 <div className="container-0 ">
                                     <div className="box"> <p className="c-heading">Per kill</p><p>{items.per_kill}</p></div>
                                     <div className="box1"><p className="c-heading">Chicken Dinner</p><p>{items.winner}</p></div>
-                                    <div className="box2"> <p className="c-heading" >Entry</p><p key={items.id}>{items.entry}</p></div>
+                                    <div className="box2"> <p className="c-heading" >Entry</p><p key={items.id}>{items.entry==0?"Free":<p>{items.entry}</p>}</p></div>
                                     <div className="box3"> <p className="c-heading">Players</p><p>{items.players}</p></div>
                                 </div>
                                 <div className="container-1">
@@ -384,7 +384,7 @@ class Contests extends Component {
                                     <div className="box5"><p style={{ color: "red" }}>{items.date} - {items.time} </p><p></p></div>
                                     <div className="box6"> <button type="button" className="btn btn-secondary btn-sm">{items.type}</button></div>
                                     <div className="box7" key={items.id}>{items.button ? <button key={items.id} onClick={this.Join.bind(this, items.entry, items.id, items.type)} className="btn btn-sm btn-outline-success">Join</button>
-                                        : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board.bind(this, items.id)}>Closed</button>}
+                                        : <button className="btn btn-sm btn-outline-danger" key={items.id} onClick={this.board}>Closed</button>}
                                     </div>
                                 </div>
                             </div>
