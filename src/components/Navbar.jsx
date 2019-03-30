@@ -21,7 +21,9 @@ class Navbar extends Component {
       coins: 0,
       open: false,
       openR: false,
-      loggedIn: false
+      loggedIn: false,
+      openChangeName: false,
+      user_id: ""
     }
   }
 
@@ -29,10 +31,12 @@ class Navbar extends Component {
     let com = this
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user.uid)
-        firebase.database().ref().child("profiles/" + user.uid + "/coins").once("value", snap => {
-          com.setState({ coins: snap.val(), loggedIn: true, open: false, openR: false })
-          console.log(snap.val())
+        firebase.database().ref().child("profiles/" + user.uid).once("value", snap => {
+          com.setState({ coins: snap.val().coins, loggedIn: true, open: false, openR: false })
+          if (snap.val().update) {
+          } else {
+            com.setState({ openChangeName: true, user_id: user.uid })
+          }
         })
       }
       else {
@@ -64,7 +68,6 @@ class Navbar extends Component {
     e.preventDefault();
     var email = this.name.value
     email = email.replace(/\s/g, '');
-    console.log(email)
     firebase.auth().signInWithEmailAndPassword(email, this.password.value).catch(error => {
       if (error) {
         var errorMessage = error.message;
@@ -111,6 +114,28 @@ class Navbar extends Component {
           else {
 
           }
+        })
+      }
+    })
+  }
+
+  handleChangeName = e => {
+    e.preventDefault()
+    let com = this
+    let id = this.state.user_id
+    let up = {}
+    up["profiles/" + id + "/pubg_id"] = this.changeName.value
+    firebase.database().ref().update(up, error => {
+      if (error) {
+        alert("something fishy occured :P Please reload")
+      } else {
+        let ups = {}
+        ups["profiles/" + id + "/update"] = true
+        firebase.database().ref().update(ups, error => {
+          if(!error){
+            alert("updated")
+            com.setState({ openChangeName:false })
+          }        
         })
       }
     })
@@ -204,6 +229,27 @@ class Navbar extends Component {
                 <Button onClick={this.handleRegisters} color="primary">Register</Button>
                 <Button onClick={this.handleClose} color="primary">Cancel</Button>
                 <Button onClick={this.handleLogin} color="primary">Sign In</Button>
+              </DialogActions>
+            </Dialog>
+
+
+            <Dialog
+              open={this.state.openChangeName}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title">
+              {/* Sign in */}
+              <DialogTitle id="form-dialog-title">Update PUBG Name</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  inputRef={ec => (this.changeName = ec)}
+                  label="your pubg name"
+                  type="name"
+                  fullWidth />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleChangeName} color="success">Change Name</Button>
               </DialogActions>
             </Dialog>
           </div>

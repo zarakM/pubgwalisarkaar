@@ -142,7 +142,7 @@ class MyProfile extends Component {
                         <div className="pro-field">
                             <h2 className="qrhead"> QR Code </h2>
                             <img src={QrCode} height="350px" width="300px" alt="jazz cash qr code" />
-                            <p className="mbl-usr"> Using a mobile? <a href="youtube.com"> click here</a> </p>
+                            <p className="mbl-usr"> Using a mobile? <a href="https://www.youtube.com/watch?v=nbEEUMrlEnk"> click here</a> </p>
                             <p className="mbl-usr1"> <span >Note:</span> coins will be added after an hour of purchase.</p>                        
                             <button className="btn btn-info" onClick={this.closeBuying}> Go Back </button>
                         </div>
