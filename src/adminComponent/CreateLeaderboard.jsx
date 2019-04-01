@@ -31,20 +31,20 @@ class CreateLeaderboard extends Component {
             prize: this.prize.value
         }, error => {
             if (error) {
-                com.state.data.push({
-                    row_key: key,
-                    user: com.user.value,
-                    kills: com.kills.value,
-                    rank: com.rank.value,
-                    prize: com.prize.value
-                })
-                com.user.value = ""
-                com.kills.value = ""
-                com.rank.value = ""
-                com.prize.value = ""
-                com.setState({ data: com.state.data })
-            } else {
                 alert("Error occured check your internet or refresh your page" + error)
+            } else {
+                    com.state.data.push({
+                        row_key: key,
+                        user: com.user.value,
+                        kills: com.kills.value,
+                        rank: com.rank.value,
+                        prize: com.prize.value
+                    })
+                    com.user.value = ""
+                    com.kills.value = ""
+                    com.rank.value = ""
+                    com.prize.value = ""
+                    com.setState({ data: com.state.data })
             }
         })
     }
